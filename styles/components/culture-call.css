@@ -59,6 +59,7 @@
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--text-dark-bg);
+  min-height: 44px;        /* comfortable tap target on mobile */
   padding-bottom: 6px;
   border-bottom: 2px solid var(--orange);
 }

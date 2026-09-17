@@ -1,0 +1,258 @@
+/* =========================================================
+   Section 7 — The Afro Wall
+   Masonry column flow: scales to any number of photos without
+   changing the layout. Tile proportions cycle through a small
+   set of shapes so the wall stays varied but never chaotic.
+   ========================================================= */
+.afro-wall {
+  position: relative;
+  background: var(--cream-2);
+  overflow: hidden;
+}
+.afro-wall::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 6px;
+  background: linear-gradient(90deg, var(--orange) 0 33%, var(--gold) 33% 66%, var(--red) 66% 100%);
+}
+
+/* ---------- Heading ---------- */
+.afro-wall__head { display: grid; gap: 12px; max-width: 54ch; }
+.afro-wall__title {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.005em;
+  font-size: var(--display-sm);
+  line-height: 0.88;
+  color: var(--ink);
+}
+.afro-wall__title em { font-style: normal; color: var(--red); }
+.afro-wall__kicker {
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 4.4vw, 1.5rem);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--red-deep);
+}
+.afro-wall__sub { max-width: 40ch; color: rgba(23, 19, 15, 0.72); }
+
+/* Sparse editorial marks — decorative only */
+.afro-wall__marks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: clamp(18px, 4vw, 26px);
+}
+.afro-wall__mark {
+  padding: 5px 10px;
+  border: 2px solid var(--ink);
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+.afro-wall__mark--fill { background: var(--ink); color: var(--text-dark-bg); border-color: var(--ink); }
+.afro-wall__mark--accent { background: var(--orange); color: #fff; border-color: var(--orange); }
+
+/* ---------- The wall ---------- */
+.afro-wall__grid {
+  margin-top: clamp(30px, 6vw, 52px);
+  columns: 2;
+  column-gap: clamp(10px, 2.4vw, 18px);
+}
+.afro-wall__item {
+  break-inside: avoid;
+  margin-bottom: clamp(10px, 2.4vw, 18px);
+  /* room for the rotation so nothing clips or overflows */
+  padding-inline: 2px;
+}
+
+.afro-wall__tile {
+  display: block;
+  width: 100%;
+  padding: 6px;
+  background: #fff;
+  border: 0;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(23, 19, 15, 0.16);
+  transform: rotate(var(--rot, 0deg));
+  transition: transform 220ms var(--ease), box-shadow 220ms var(--ease);
+}
+.afro-wall__tile picture { display: block; }
+.afro-wall__tile img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: var(--ar, 4 / 5);
+  object-fit: cover;
+  /* crops favour the crown; override per photo with `focus` in the data */
+  object-position: var(--focus, 50% 32%);
+  background: rgba(23, 19, 15, 0.08);
+}
+.afro-wall__tile:hover,
+.afro-wall__tile:focus-visible {
+  transform: rotate(0deg) translateY(-4px);
+  box-shadow: 0 14px 30px rgba(23, 19, 15, 0.26);
+}
+
+/* Controlled variation.
+   Shapes cycle in 7s and tilts in 5s — two lengths that rarely line up
+   with the number of tiles per column, so the wall keeps staggering
+   instead of settling into a rigid grid, at any photo count.
+   Every ratio stays portrait-or-square: submissions are phone selfies,
+   and a landscape crop would cut the crown out of the frame. */
+.afro-wall__item:nth-child(7n + 1) .afro-wall__tile { --ar: 4 / 5; }
+.afro-wall__item:nth-child(7n + 2) .afro-wall__tile { --ar: 1 / 1; }
+.afro-wall__item:nth-child(7n + 3) .afro-wall__tile { --ar: 3 / 4; }
+.afro-wall__item:nth-child(7n + 4) .afro-wall__tile { --ar: 5 / 6; }
+.afro-wall__item:nth-child(7n + 5) .afro-wall__tile { --ar: 2 / 3; }
+.afro-wall__item:nth-child(7n + 6) .afro-wall__tile { --ar: 9 / 10; }
+.afro-wall__item:nth-child(7n + 7) .afro-wall__tile { --ar: 7 / 9; }
+
+.afro-wall__item:nth-child(5n + 1) .afro-wall__tile { --rot: -0.8deg; }
+.afro-wall__item:nth-child(5n + 2) .afro-wall__tile { --rot: 0.7deg; }
+.afro-wall__item:nth-child(5n + 3) .afro-wall__tile { --rot: -0.4deg; }
+.afro-wall__item:nth-child(5n + 4) .afro-wall__tile { --rot: 0.9deg; }
+.afro-wall__item:nth-child(5n + 5) .afro-wall__tile { --rot: 0.3deg; }
+
+/* Frame accents, on a third cycle so they land unpredictably */
+.afro-wall__item:nth-child(3n + 2) .afro-wall__tile { background: var(--cream); }
+.afro-wall__item:nth-child(5n + 3) .afro-wall__tile { box-shadow: 0 6px 18px rgba(142, 27, 13, 0.24); }
+.afro-wall__item:nth-child(11n + 4) .afro-wall__tile { padding: 6px 6px 22px; }
+
+.afro-wall__empty {
+  margin-top: clamp(28px, 5vw, 44px);
+  padding: clamp(24px, 6vw, 40px);
+  border: 2px dashed var(--ink);
+  max-width: 46ch;
+  color: rgba(23, 19, 15, 0.75);
+}
+
+/* ---------- Join the wall ---------- */
+.afro-wall__cta[hidden] { display: none; }
+.afro-wall__cta {
+  margin-top: clamp(32px, 6vw, 56px);
+  padding-top: clamp(24px, 4vw, 34px);
+  border-top: 2px solid var(--ink);
+  display: grid;
+  gap: 14px;
+  justify-items: start;
+}
+.afro-wall__cta-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 7vw, 2.2rem);
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.afro-wall__cta-text { color: rgba(23, 19, 15, 0.72); }
+
+/* ---------- Lightbox ---------- */
+.afro-lb {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  opacity: 0;
+  transition: opacity 200ms var(--ease);
+}
+.afro-lb.is-open { opacity: 1; }
+.afro-lb[hidden] { display: none; }
+
+.afro-lb__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(17, 16, 14, 0.975);
+  border: 0;
+  cursor: zoom-out;
+}
+
+.afro-lb__bar,
+.afro-lb__foot {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px var(--gutter);
+  color: var(--text-dark-bg);
+}
+.afro-lb__count {
+  font-family: var(--font-display);
+  letter-spacing: 0.08em;
+  font-size: 0.95rem;
+  color: var(--gold);
+}
+
+.afro-lb__stage {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  padding: 0 clamp(8px, 3vw, 28px);
+  min-height: 0;
+}
+.afro-lb__img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border: 4px solid var(--cream);
+  background: var(--ink);
+}
+
+.afro-lb__caption {
+  max-width: 52ch;
+  font-size: var(--step--1);
+  color: rgba(248, 232, 203, 0.78);
+}
+
+.afro-lb__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 48px;
+  min-height: 48px;
+  padding: 10px 16px;
+  background: transparent;
+  color: var(--text-dark-bg);
+  border: 2px solid rgba(248, 232, 203, 0.4);
+  font-weight: 800;
+  font-size: var(--step--1);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 180ms var(--ease), border-color 180ms var(--ease);
+}
+.afro-lb__btn:hover { background: var(--orange); border-color: var(--orange); color: #fff; }
+.afro-lb__nav { display: flex; gap: 10px; }
+.afro-lb__btn[hidden] { display: none; }
+
+@media (min-width: 768px) {
+  .afro-wall__grid { columns: 3; }
+  .afro-wall__head { max-width: 60ch; }
+}
+@media (min-width: 1280px) {
+  .afro-wall__grid { columns: 4; }
+}
+
+/* While the wall is still small, it uses no more columns than it has
+   photos and stays narrower, so a handful of photos reads as deliberate
+   rather than as a wide grid with gaps. It widens on its own as photos
+   are added — nothing to change by hand. */
+@media (min-width: 768px) {
+  .afro-wall__grid[data-count="1"] { columns: 1; max-width: 26rem; }
+  .afro-wall__grid[data-count="2"] { columns: 2; max-width: 44rem; }
+  .afro-wall__grid[data-count="3"] { columns: 3; max-width: 62rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .afro-wall__tile { transition: none; transform: none; }
+  .afro-wall__tile:hover,
+  .afro-wall__tile:focus-visible { transform: none; }
+  .afro-lb { transition: none; }
+}

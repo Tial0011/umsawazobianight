@@ -33,6 +33,7 @@
   --gutter: 20px;
   --section-y: clamp(64px, 9vw, 140px);
   --shell: 1320px;
+  --nav-h: 76px;            /* sticky navbar height — used for anchor offsets */
 
   /* Motion */
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);

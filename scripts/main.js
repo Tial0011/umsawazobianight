@@ -1,5 +1,6 @@
 import { initNav } from './nav.js';
 import { initReveal } from './reveal.js';
+import { initAfroWall } from './afro-wall.js';
 import { initCarousel } from './carousel.js';
 import { initTicker } from './ticker.js';
 import { initVideoSound } from './video-sound.js';
@@ -12,6 +13,7 @@ import { initFooterSocials } from './footer.js';
 const boot = () => {
   initNav();
   initProgramme();
+  initAfroWall();   // build the wall before reveal observes its tiles
   initReveal();
   initCarousel();
   initTicker();

@@ -43,6 +43,9 @@ button { font: inherit; color: inherit; }
 
 .section { padding-block: var(--section-y); }
 
+/* Anchor links land below the sticky navbar instead of under it */
+main section[id], #hero { scroll-margin-top: var(--nav-h); }
+
 .visually-hidden {
   position: absolute; width: 1px; height: 1px;
   margin: -1px; padding: 0; border: 0;

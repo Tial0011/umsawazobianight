@@ -49,6 +49,11 @@ export const eventConfig = {
     instructions: 'After payment, send your receipt to the Financial Secretary or Treasurer listed in the payment details below.',
   },
 
+  // Section 7 — where "Join the wall" should send people (a WhatsApp
+  // link, a form, a mailto address...). While this is empty the CTA
+  // stays hidden rather than pointing at an invented destination.
+  afroWallSubmissionUrl: '',
+
   // The live domain, once known, e.g. "https://wazobianight.com/".
   // Used for sharing; falls back to the browser's current URL
   // when empty, so Share/Copy Link still work correctly today.

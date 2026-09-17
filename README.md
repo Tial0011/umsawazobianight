@@ -8,7 +8,7 @@ Official event site. Built so far:
 4. And beyond. — the wider cultural picture
 5. The cultural experience — video placeholder + feature tags
 6. Come as your culture — emotional/participatory statement + placeholder art
-7. The Afro Wall — **not built yet**, waiting on real photography (see below)
+7. The Afro Wall — community photo wall, data-driven, with a lightbox
 8. What's waiting for you? — editorial list of experiences
 9. The night / programme — event timeline, data-driven
 10. Live countdown — real-time countdown to doors-open, WAT-correct
@@ -126,24 +126,66 @@ If you also change the date/time, update the matching `startDate` in the
 `Event` JSON-LD block near the top of `index.html`, and the `.countdown__meta`
 and `.hero__band` text, so the page doesn't contradict itself.
 
-## Adding Section 7 — The Afro Wall
+## Section 7 — The Afro Wall
 
-Section 7 was intentionally skipped: it needs real event photography, which
-hadn't been supplied at the time these sections were built. A marked gap is
-left between Section 6 (`#your-culture`) and Section 8 (`#waiting`) in
-`index.html` — search for `SECTION 7 — THE AFRO WALL` to find it. To add it
-later:
+The wall is rendered from one array, `afroWallImages` in
+`scripts/afro-wall.js`. Nothing else has to change as it grows — the layout,
+the lightbox and the shape rhythm all adapt to however many photos are in the
+array (2, 20 or 50+).
 
-1. Gather the real photographs and optimise them for web (WebP, sensible
-   dimensions — a wall/grid layout usually wants square or portrait crops).
-2. Build the section using the same tokens and patterns as sections 6–10
-   (`.shell`, `.section`, the palette in `tokens.css`, `Anton`/`Manrope`) so it
-   reads as part of the same site.
-3. Add `styles/components/afro-wall.css` and link it in `<head>`, in the same
-   position in the list as the other section stylesheets.
-4. Insert the `<section>` markup at the marked gap, between Sections 6 and 8.
-5. Update the section-order comments in this README and in `index.html` once
-   it's in.
+### Adding photos
+
+1. Optimise the originals:
+
+   ```bash
+   python3 tools/optimise-afro-photos.py afro-03 ~/Downloads/whatsapp-photo.jpg
+   ```
+
+   That writes `afro-03-400/-800/-1200.webp` + `.jpg` and `afro-03-full.webp`
+   + `.jpg` into `assets/images/afro-wall/`, and prints the array entry to
+   paste. Photos are only resized and re-encoded — no filters, retouching or
+   any other alteration of the people in them.
+
+2. Paste the printed entry into `afroWallImages`:
+
+   ```js
+   {
+     name: 'afro-03',
+     widths: [400, 800, 1200],
+     width: 1080, height: 1440,   // intrinsic size — prevents layout shift
+     alt: 'Short, factual description of the photo.',
+     focus: '50% 32%',            // optional crop focus
+   }
+   ```
+
+   Write the `alt` text by hand: it is what screen-reader users and anyone on
+   a failed image load get.
+
+### How the layout stays varied
+
+Tiles flow in a CSS column masonry (2 columns on mobile, 3 from 768px,
+4 from 1280px). Tile proportions cycle every 7 items and tilts every 5, two
+lengths that rarely line up with the number of tiles per column, so the wall
+keeps staggering instead of settling into a rigid grid at any photo count.
+Every ratio is portrait or square, because submissions are phone selfies and a
+landscape crop would cut the crown out of frame.
+
+The first four images load eagerly; the rest are `loading="lazy"`. Every tile
+carries intrinsic `width`/`height` plus a CSS `aspect-ratio`, so nothing
+shifts as images arrive.
+
+### The lightbox
+
+Plain JS, no library: click or tap a photo to open it, `Escape` or the Close
+button to leave, arrow keys or the on-screen arrows (or a swipe) to move
+between photos. Focus is trapped while open, returns to the tile that opened
+it on close, and background scrolling is locked.
+
+### "Join the wall" CTA
+
+Hidden until `eventConfig.afroWallSubmissionUrl` in `scripts/config.js` is
+set. Put the real WhatsApp link, form URL or `mailto:` address there and the
+CTA appears and points at it. No placeholder destination is invented.
 
 ## Sections 11–14 — event config, payment, sharing, footer
 

@@ -58,10 +58,13 @@
 .footer__nav ul,
 .footer__socials ul {
   display: grid;
-  gap: 10px;
+  gap: 2px;
 }
 .footer__nav a,
 .footer__socials a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;        /* comfortable tap target on mobile */
   color: rgba(248, 232, 203, 0.85);
   transition: color 160ms var(--ease);
 }

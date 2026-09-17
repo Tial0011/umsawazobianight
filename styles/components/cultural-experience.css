@@ -46,6 +46,7 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  min-height: 44px;        /* comfortable tap target on mobile */
   padding: 9px 14px 9px 12px;
   background: var(--ink);
   color: var(--gold);

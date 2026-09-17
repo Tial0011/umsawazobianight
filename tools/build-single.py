@@ -44,8 +44,9 @@ html = html.replace("</head>", "<style>\n" + "\n".join(css_parts) + "\n</style>\
 
 # ---- JS: flatten the ES modules into one classic script ---------------------
 order = [
-    "nav.js", "reveal.js", "carousel.js", "ticker.js", "video-sound.js",
-    "programme.js", "countdown.js", "main.js",
+    "config.js", "nav.js", "reveal.js", "afro-wall.js", "carousel.js",
+    "ticker.js", "video-sound.js", "programme.js", "countdown.js",
+    "tickets.js", "share.js", "footer.js", "main.js",
 ]
 js = []
 for name in order:

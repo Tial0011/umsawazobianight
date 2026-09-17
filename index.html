@@ -45,6 +45,7 @@
 <link rel="stylesheet" href="styles/components/beyond.css">
 <link rel="stylesheet" href="styles/components/cultural-experience.css">
 <link rel="stylesheet" href="styles/components/culture-call.css">
+<link rel="stylesheet" href="styles/components/afro-wall.css">
 <link rel="stylesheet" href="styles/components/waiting.css">
 <link rel="stylesheet" href="styles/components/programme.css">
 <link rel="stylesheet" href="styles/components/countdown.css">
@@ -365,10 +366,65 @@
   </section>
 
   <!-- ============ SECTION 7 — THE AFRO WALL ============
-       Not implemented yet: real event photography is required first.
-       Insert the Afro Wall section here, between "Come As Your Culture"
-       and "What's Waiting For You?", once photos are supplied.
-       See README.md → "Adding Section 7 — The Afro Wall" for guidance. -->
+       Rendered from the data array in scripts/afro-wall.js.
+       Add photos there — the layout and lightbox need no changes. -->
+  <section class="afro-wall section" id="afro-wall" aria-labelledby="afro-wall-h" data-afro-wall>
+    <div class="shell">
+      <div class="afro-wall__head" data-reveal="1">
+        <h2 class="afro-wall__title" id="afro-wall-h">The Afro<br><em>Wall.</em></h2>
+        <p class="afro-wall__kicker">Your crown. Your culture. Your story.</p>
+        <p class="afro-wall__sub">From the people bringing their culture to Wazobia.</p>
+        <ul class="afro-wall__marks" aria-hidden="true">
+          <li class="afro-wall__mark afro-wall__mark--fill">Afro</li>
+          <li class="afro-wall__mark">My crown</li>
+          <li class="afro-wall__mark afro-wall__mark--accent">Wazobia</li>
+          <li class="afro-wall__mark">01.10.26</li>
+        </ul>
+      </div>
+
+      <ul class="afro-wall__grid" data-afro-grid data-reveal="2"></ul>
+      <noscript>
+        <p class="afro-wall__empty">The Afro Wall needs JavaScript to load its photos.</p>
+      </noscript>
+
+      <p class="afro-wall__empty" data-afro-empty hidden>
+        The wall is going up. Photos land here as they come in.
+      </p>
+
+      <div class="afro-wall__cta" data-afro-cta hidden>
+        <h3 class="afro-wall__cta-title">Want to join the wall?</h3>
+        <p class="afro-wall__cta-text">Send your Afro. Let the wall grow.</p>
+        <a class="btn btn--primary" href="#afro-wall" data-afro-cta-link aria-disabled="true">Join the wall</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Afro Wall lightbox (populated by scripts/afro-wall.js) -->
+  <div class="afro-lb on-dark" role="dialog" aria-modal="true" aria-label="Afro Wall photo viewer"
+       hidden data-afro-lightbox>
+    <button class="afro-lb__backdrop" type="button" aria-label="Close photo viewer"
+            data-afro-backdrop tabindex="-1"></button>
+
+    <div class="afro-lb__bar">
+      <span class="afro-lb__count" data-afro-lb-count></span>
+      <button class="afro-lb__btn" type="button" data-afro-close>Close</button>
+    </div>
+
+    <div class="afro-lb__stage">
+      <picture>
+        <source type="image/webp" data-afro-lb-source>
+        <img class="afro-lb__img" alt="" decoding="async" data-afro-lb-img>
+      </picture>
+    </div>
+
+    <div class="afro-lb__foot">
+      <p class="afro-lb__caption" data-afro-lb-caption></p>
+      <div class="afro-lb__nav">
+        <button class="afro-lb__btn" type="button" data-afro-prev aria-label="Previous photo">&#8592;</button>
+        <button class="afro-lb__btn" type="button" data-afro-next aria-label="Next photo">&#8594;</button>
+      </div>
+    </div>
+  </div>
 
   <!-- ============ SECTION 8 — WHAT'S WAITING FOR YOU? ============ -->
   <section class="waiting section" id="waiting" aria-labelledby="waiting-h">

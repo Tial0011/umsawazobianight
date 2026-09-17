@@ -171,6 +171,9 @@
 }
 .payment-contact__links { display: flex; flex-wrap: wrap; gap: 8px 16px; }
 .payment-contact__links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;        /* comfortable tap target on mobile */
   font-weight: 800;
   text-decoration: underline;
   text-underline-offset: 3px;
