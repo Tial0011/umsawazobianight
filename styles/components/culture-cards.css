@@ -42,23 +42,10 @@
   flex-direction: column;
   border-bottom: 5px solid var(--orange);
 }
-.culture-card:nth-child(2) { border-bottom-color: var(--red); }
-.culture-card:nth-child(3) { border-bottom-color: var(--gold); }
+.culture-card:nth-child(3n+2) { border-bottom-color: var(--red); }
+.culture-card:nth-child(3n) { border-bottom-color: var(--gold); }
 
 .culture-card__media { overflow: hidden; position: relative; }
-/* PLACEHOLDER marker — delete this rule once real photography is in place */
-.culture-card__media::after {
-  content: "Photo placeholder";
-  position: absolute;
-  left: 0; bottom: 0;
-  padding: 6px 10px;
-  background: var(--ink);
-  color: var(--gold);
-  font-size: 0.62rem;
-  font-weight: 800;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
 .culture-card__media img {
   width: 100%;
   aspect-ratio: 4 / 3;

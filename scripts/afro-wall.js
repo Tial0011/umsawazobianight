@@ -87,14 +87,6 @@ export const afroWallImages = [
     focus: '50% 42%',
   },
   {
-    name: 'afro-06',
-    widths: [400, 800, 1080],
-    width: 1080,
-    height: 1080,
-    alt: 'A four-photo grid of a young woman with a full Afro in a yellow striped top.',
-    focus: '50% 40%',
-  },
-  {
     name: 'afro-07',
     widths: [400, 608],
     width: 608,
@@ -118,27 +110,12 @@ export const afroWallImages = [
     alt: 'A warm, vintage-toned portrait of a young man with an Afro, wearing a white vest.',
     focus: '50% 32%',
   },
-  {
-    type: 'video',
-    name: 'afro-10',
-    widths: [400, 464],
-    width: 464,
-    height: 832,
-    video: 'assets/video/afro-wall/afro-10',
-    alt: 'A short clip showing off an Afro hairstyle.',
-    focus: '50% 30%',
-  },
-  {
-    type: 'video',
-    name: 'afro-11',
-    widths: [400, 464],
-    width: 464,
-    height: 832,
-    video: 'assets/video/afro-wall/afro-11',
-    alt: 'A short clip showing off an Afro hairstyle.',
-    focus: '50% 30%',
-  },
 ];
+
+/* Removed: afro-06 (the four-photo-grid tile) and the two video clips
+   (afro-10, afro-11) — everything else from the original wall is back.
+   Add new entries here in the same shape (see TO ADD A PHOTO / TO ADD A
+   VIDEO CLIP above) whenever you want to grow the wall again. */
 
 /* Where "Join the wall" should send people. Set it in scripts/config.js
    (eventConfig.afroWallSubmissionUrl). While it is empty the CTA stays
