@@ -1,0 +1,43 @@
+/* =========================================================
+   Design tokens — Wazobia Night 2026
+   Change values here, not inside components.
+   ========================================================= */
+:root {
+  /* Colour */
+  --cream:        #F5E1C2;
+  --cream-2:      #EED3AA;
+  --ink:          #11100E;
+  --orange:       #F15A00;
+  --red:          #C9280C;
+  --red-deep:     #8E1B0D;
+  --gold:         #D89B2B;
+  --text-light-bg:#17130F;
+  --text-dark-bg: #F8E8CB;
+
+  --rule:         rgba(23, 19, 15, 0.16);
+  --rule-dark:    rgba(248, 232, 203, 0.22);
+
+  /* Type */
+  --font-display: "Anton", "Arial Narrow", Impact, system-ui, sans-serif;
+  --font-body:    "Manrope", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  --step--1: clamp(0.80rem, 0.77rem + 0.15vw, 0.88rem);
+  --step-0:  clamp(1.00rem, 0.96rem + 0.20vw, 1.10rem);
+  --step-1:  clamp(1.20rem, 1.10rem + 0.50vw, 1.45rem);
+  --step-2:  clamp(1.55rem, 1.35rem + 1.00vw, 2.20rem);
+  --step-3:  clamp(2.20rem, 1.70rem + 2.40vw, 3.60rem);
+  --display: clamp(3.00rem, 1.40rem + 8.60vw, 10.00rem);
+  --display-sm: clamp(2.40rem, 1.50rem + 4.60vw, 5.60rem);
+
+  /* Space */
+  --gutter: 20px;
+  --section-y: clamp(64px, 9vw, 140px);
+  --shell: 1320px;
+
+  /* Motion */
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --dur: 640ms;
+}
+
+@media (min-width: 480px) { :root { --gutter: 24px; } }
+@media (min-width: 900px) { :root { --gutter: 40px; } }

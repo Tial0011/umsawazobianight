@@ -1,0 +1,80 @@
+.intro { background: var(--cream); position: relative; }
+.intro::before {
+  content: "";
+  display: block;
+  height: 14px;
+  background-image: url("../../assets/images/pattern-tile.svg");
+  background-size: auto 26px;
+  background-repeat: repeat-x;
+  opacity: .35;
+  margin-bottom: clamp(40px, 6vw, 90px);
+}
+
+.intro__head { display: grid; gap: 20px; }
+.intro__title { font-size: var(--display-sm); color: var(--ink); line-height: 0.86; }
+.intro__text { max-width: 52ch; color: rgba(23,19,15,.8); }
+.intro__text em { font-style: italic; color: var(--red); font-weight: 700; }
+
+.syllables {
+  margin-top: clamp(40px, 7vw, 80px);
+  border-top: 2px solid var(--ink);
+}
+.syllable {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 12px;
+  padding: 18px 0;
+  border-bottom: 2px solid var(--ink);
+}
+.syllable__word {
+  font-size: clamp(3rem, 16vw, 5rem);
+  line-height: 0.9;
+  color: var(--red);
+}
+.syllable:nth-child(2) .syllable__word { color: var(--orange); }
+.syllable:nth-child(3) .syllable__word { color: var(--red-deep); }
+.syllable__lang {
+  font-size: var(--step--1);
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-align: right;
+}
+.syllable__gloss {
+  grid-column: 2;
+  font-size: var(--step--1);
+  color: rgba(23,19,15,.6);
+  text-align: right;
+}
+.syllable__gloss::before { content: "“"; }
+.syllable__gloss::after { content: "”"; }
+
+.intro__statement {
+  margin-top: clamp(40px, 7vw, 80px);
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 7.4vw, 3.4rem);
+  line-height: 1.05;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.intro__statement-accent { color: var(--orange); }
+
+@media (min-width: 900px) {
+  .intro__head {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: end;
+    gap: 60px;
+  }
+  .syllables { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-bottom: 2px solid var(--ink); }
+  .syllable {
+    display: block;
+    padding: 34px 28px 30px 0;
+    border-bottom: 0;
+  }
+  .syllable + .syllable { border-left: 2px solid var(--ink); padding-left: 28px; }
+  .syllable__word { display: block; font-size: clamp(4rem, 8vw, 7rem); }
+  .syllable__lang, .syllable__gloss { display: block; text-align: left; }
+  .syllable__lang { margin-top: 14px; }
+  .intro__statement { font-size: clamp(2.6rem, 4.6vw, 4.4rem); }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "Wazobia Night 2026 — UMSA, UNIMED Ondo",
+  "short_name": "Wazobia 26",
+  "description": "Wazobia Night 2026, hosted by the University of Medical Students' Association, University of Medical Sciences, Ondo.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F5E1C2",
+  "theme_color": "#11100E",
+  "icons": [
+    { "src": "/assets/images/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}

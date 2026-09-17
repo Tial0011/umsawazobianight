@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 540" width="720" height="540" role="img" aria-label="Placeholder artwork for the Yoruba panel">
+  <rect width="720" height="540" fill="#11100E"/>
+  <path d="M290 430 a70 70 0 0 1 140 0" fill="none" stroke="#F15A00" stroke-width="6" opacity="0.90"/>
+  <path d="M246 430 a114 114 0 0 1 228 0" fill="none" stroke="#D89B2B" stroke-width="6" opacity="0.80"/>
+  <path d="M202 430 a158 158 0 0 1 316 0" fill="none" stroke="#F15A00" stroke-width="6" opacity="0.70"/>
+  <path d="M158 430 a202 202 0 0 1 404 0" fill="none" stroke="#D89B2B" stroke-width="6" opacity="0.60"/>
+  <path d="M114 430 a246 246 0 0 1 492 0" fill="none" stroke="#F15A00" stroke-width="6" opacity="0.50"/>
+  <path d="M70 430 a290 290 0 0 1 580 0" fill="none" stroke="#D89B2B" stroke-width="6" opacity="0.40"/>
+  <path d="M26 430 a334 334 0 0 1 668 0" fill="none" stroke="#F15A00" stroke-width="6" opacity="0.30"/>
+  <path d="M200 470 l22 22 l-22 22 l-22 -22 Z" fill="#C9280C" opacity="0.85"/>
+  <path d="M280 470 l22 22 l-22 22 l-22 -22 Z" fill="#C9280C" opacity="0.85"/>
+  <path d="M360 470 l22 22 l-22 22 l-22 -22 Z" fill="#C9280C" opacity="0.85"/>
+  <path d="M440 470 l22 22 l-22 22 l-22 -22 Z" fill="#C9280C" opacity="0.85"/>
+  <path d="M520 470 l22 22 l-22 22 l-22 -22 Z" fill="#C9280C" opacity="0.85"/>
+</svg>

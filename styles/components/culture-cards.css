@@ -1,0 +1,119 @@
+.cultures { background: var(--cream-2); overflow: hidden; }
+
+.cultures__head { display: grid; gap: 14px; }
+.cultures__title {
+  font-size: clamp(2rem, 8.4vw, 4.4rem);
+  line-height: 0.95;
+  color: var(--ink);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.28em;
+}
+.cultures__title .dot {
+  width: 0.16em; height: 0.16em;
+  background: var(--red);
+  border-radius: 50%;
+  display: inline-block;
+}
+.cultures__sub { max-width: 40ch; color: rgba(23,19,15,.75); }
+
+.cultures__rail {
+  margin-top: clamp(32px, 6vw, 64px);
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: min(78vw, 340px);
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-left: var(--gutter);
+  padding-inline: var(--gutter);
+  padding-bottom: 8px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.cultures__rail::-webkit-scrollbar { display: none; }
+
+.culture-card {
+  scroll-snap-align: start;
+  background: var(--ink);
+  color: var(--text-dark-bg);
+  display: flex;
+  flex-direction: column;
+  border-bottom: 5px solid var(--orange);
+}
+.culture-card:nth-child(2) { border-bottom-color: var(--red); }
+.culture-card:nth-child(3) { border-bottom-color: var(--gold); }
+
+.culture-card__media { overflow: hidden; position: relative; }
+/* PLACEHOLDER marker — delete this rule once real photography is in place */
+.culture-card__media::after {
+  content: "Photo placeholder";
+  position: absolute;
+  left: 0; bottom: 0;
+  padding: 6px 10px;
+  background: var(--ink);
+  color: var(--gold);
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.culture-card__media img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  transition: transform 500ms var(--ease);
+}
+.culture-card__body { padding: 20px 20px 26px; display: grid; gap: 10px; }
+.culture-card__name {
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 6.4vw, 2.2rem);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+.culture-card__text { font-size: var(--step--1); color: rgba(248,232,203,.78); }
+
+.cultures__controls {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.cultures__controls[hidden] { display: none; }
+.rail-btn {
+  width: 48px; height: 48px;
+  background: transparent;
+  border: 2px solid var(--ink);
+  cursor: pointer;
+  font-size: 1.1rem;
+}
+.rail-btn:hover:not(:disabled) { background: var(--ink); color: var(--text-dark-bg); }
+.rail-btn:disabled { opacity: .35; cursor: default; }
+.rail-status {
+  font-size: var(--step--1);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+@media (min-width: 900px) {
+  .cultures__head { grid-template-columns: minmax(0,1.2fr) minmax(0,1fr); align-items: end; gap: 48px; }
+  .cultures__rail {
+    max-width: var(--shell);
+    margin-inline: auto;
+    grid-auto-flow: unset;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    overflow: visible;
+  }
+  .culture-card { transition: transform 400ms var(--ease); }
+  .culture-card:hover { transform: translateY(-8px); }
+  .culture-card:hover .culture-card__media img { transform: scale(1.06); }
+  .culture-card__body { padding: 26px 26px 32px; }
+  .cultures__controls { display: none !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .culture-card, .culture-card__media img { transition: none !important; }
+  .culture-card:hover { transform: none; }
+}

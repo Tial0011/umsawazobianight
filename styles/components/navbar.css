@@ -1,0 +1,142 @@
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: transparent;
+  transition: background-color 260ms var(--ease), box-shadow 260ms var(--ease);
+}
+.nav.is-stuck {
+  background: var(--cream);
+  box-shadow: 0 1px 0 var(--rule);
+}
+.nav.is-open { background: var(--ink); }
+
+.nav__bar {
+  max-width: var(--shell);
+  margin-inline: auto;
+  padding: 12px var(--gutter);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.nav__brand { display: inline-flex; align-items: center; gap: 10px; }
+.nav__brand-mark {
+  width: 14px; height: 24px;
+  background: linear-gradient(180deg, var(--orange) 0 50%, var(--red) 50% 100%);
+  clip-path: polygon(0 0, 100% 12%, 100% 88%, 0 100%);
+}
+.nav__brand-text {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-light-bg);
+}
+.nav__brand-year { color: var(--red); margin-left: 4px; }
+.nav.is-open .nav__brand-text { color: var(--text-dark-bg); }
+
+/* ---- desktop nav ---- */
+.nav__desktop { display: none; }
+.nav__list { display: flex; gap: 28px; }
+.nav__list a {
+  font-size: var(--step--1);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 6px 0;
+  position: relative;
+}
+.nav__list a::after {
+  content: ""; position: absolute; left: 0; right: 100%; bottom: 0;
+  height: 2px; background: var(--red);
+  transition: right 220ms var(--ease);
+}
+.nav__list a:hover::after, .nav__list a[aria-current="true"]::after { right: 0; }
+
+/* ---- toggle ---- */
+.nav__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 8px 4px 8px 12px;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+.nav__toggle-label {
+  font-size: var(--step--1);
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.nav.is-open .nav__toggle-label { color: var(--text-dark-bg); }
+.nav__toggle-icon { display: block; width: 30px; height: 16px; position: relative; }
+.nav__toggle-icon i {
+  position: absolute; left: 0; width: 100%; height: 3px;
+  background: var(--ink);
+  transition: transform 260ms var(--ease), background-color 200ms var(--ease);
+}
+.nav__toggle-icon i:first-child { top: 2px; }
+.nav__toggle-icon i:last-child { bottom: 2px; }
+.nav.is-open .nav__toggle-icon i { background: var(--orange); }
+.nav.is-open .nav__toggle-icon i:first-child { transform: translateY(5px) rotate(45deg); }
+.nav.is-open .nav__toggle-icon i:last-child { transform: translateY(-6px) rotate(-45deg); }
+
+/* ---- mobile panel ---- */
+.nav__panel {
+  position: fixed;
+  inset: 56px 0 0;
+  background: var(--ink);
+  color: var(--text-dark-bg);
+  padding: 8px var(--gutter) calc(24px + env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.nav__panel[hidden] { display: none; }
+.js .nav__panel { opacity: 0; transform: translateY(-10px); transition: opacity 240ms var(--ease), transform 240ms var(--ease); }
+.js .nav__panel.is-visible { opacity: 1; transform: none; }
+
+.nav__panel-list { border-top: 1px solid var(--rule-dark); }
+.nav__panel-list li { border-bottom: 1px solid var(--rule-dark); }
+.nav__panel-list a {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  padding: 18px 2px;
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 8vw, 2.6rem);
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--text-dark-bg);
+}
+.nav__panel-list a:hover { color: var(--orange); }
+.nav__panel-idx {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--gold);
+}
+.nav__panel-foot { padding-top: 24px; display: grid; gap: 14px; }
+.nav__panel-meta {
+  font-size: var(--step--1);
+  line-height: 1.5;
+  color: rgba(248, 232, 203, 0.7);
+}
+
+@media (min-width: 900px) {
+  .nav__desktop { display: flex; align-items: center; gap: 32px; }
+  .nav__toggle { display: none; }
+  .nav__panel { display: none !important; }
+  .nav__bar { padding-block: 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav, .nav__panel, .nav__toggle-icon i, .nav__list a::after { transition: none !important; }
+}

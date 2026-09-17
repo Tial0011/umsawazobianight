@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# PLACEHOLDER: point this at the live domain before launch
+Sitemap: https://example.com/sitemap.xml

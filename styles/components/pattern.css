@@ -1,0 +1,18 @@
+/* One pattern system for the whole site: the zig-zag / diamond band
+   taken from the border of the flyer. Used at low opacity only. */
+.pattern-band {
+  height: 14px;
+  background-image: url("../../assets/images/pattern-tile.svg");
+  background-size: auto 28px;
+  background-repeat: repeat-x;
+  background-position: center;
+  opacity: 0.5;
+}
+
+/* Soft embossed wall used behind large typography */
+.hero__wall,
+.beyond::before {
+  background-image:
+    repeating-linear-gradient(45deg,  rgba(142,27,13,.05) 0 2px, transparent 2px 22px),
+    repeating-linear-gradient(-45deg, rgba(142,27,13,.05) 0 2px, transparent 2px 22px);
+}
