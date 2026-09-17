@@ -1,0 +1,73 @@
+.final-cta {
+  position: relative;
+  background: var(--ink);
+  color: var(--text-dark-bg);
+  overflow: hidden;
+  text-align: center;
+}
+.final-cta__pattern {
+  position: absolute;
+  inset: 0;
+  opacity: 0.5;
+  background-image:
+    repeating-linear-gradient(45deg,  rgba(241,90,0,.08) 0 2px, transparent 2px 30px),
+    repeating-linear-gradient(-45deg, rgba(201,40,12,.08) 0 2px, transparent 2px 30px);
+}
+
+.final-cta__inner {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: clamp(18px, 4vw, 26px);
+}
+
+.final-cta__eyebrow {
+  font-size: var(--step--1);
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.final-cta__title {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 16vw, 8rem);
+  line-height: 0.86;
+  text-transform: uppercase;
+  max-width: 18ch;
+}
+.final-cta__title span { display: block; color: var(--text-dark-bg); }
+.final-cta__title-accent { color: var(--orange); margin-top: 0.05em; }
+
+.final-cta__meta {
+  font-size: var(--step--1);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(248, 232, 203, 0.75);
+}
+
+.final-cta__actions {
+  margin-top: clamp(10px, 3vw, 18px);
+  display: grid;
+  gap: 14px;
+  width: 100%;
+  max-width: 360px;
+}
+.final-cta__actions .btn { width: 100%; }
+/* the ghost button assumes a light background elsewhere on the page —
+   flip it to light-on-dark here so it stays visible on the black CTA */
+.final-cta__actions .btn--ghost {
+  --btn-fg: var(--text-dark-bg);
+  border-color: var(--text-dark-bg);
+}
+.final-cta__actions .btn--ghost:hover { --btn-bg: var(--text-dark-bg); --btn-fg: var(--ink); }
+
+@media (min-width: 640px) {
+  .final-cta__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: none;
+  }
+  .final-cta__actions .btn { width: auto; }
+}

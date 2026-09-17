@@ -12,6 +12,10 @@ Official event site. Built so far:
 8. What's waiting for you? — editorial list of experiences
 9. The night / programme — event timeline, data-driven
 10. Live countdown — real-time countdown to doors-open, WAT-correct
+11. Get your ticket — pricing, how-to-pay steps, payment panel (config-driven)
+12. Share the night — WhatsApp/X/Facebook/copy-link, native share on mobile
+13. Wazobia awaits — final CTA
+14. Footer — event details, quick links, socials (config-driven)
 
 ## Running it
 
@@ -141,6 +145,43 @@ later:
 5. Update the section-order comments in this README and in `index.html` once
    it's in.
 
+## Sections 11–14 — event config, payment, sharing, footer
+
+All editable facts for these four sections live in one place:
+`scripts/config.js`, exported as `eventConfig`. Nothing else needs to change
+when any of the following arrive:
+
+- **`eventConfig.payment.paymentLink`** — once set, every "Get your ticket"
+  button on the site (navbar, hero, Section 11, Section 13) automatically
+  points at it and opens in a new tab. Until then they all point at safe,
+  real in-page anchors (`#tickets`, `#payment-instructions`) — never a bare
+  `#` and never a fake checkout.
+- **`eventConfig.payment.bankName`** — currently empty, so the Section 11
+  payment panel shows "Coming soon" for just this one field while account
+  number and account name (already confirmed) render normally. Each of the
+  three fields renders independently — none of them wait on the others.
+- **`eventConfig.payment.contacts`** — the people to contact for payment
+  enquiries and for sending proof of payment, rendered with tap-to-call and
+  tap-to-WhatsApp links. Add, remove or edit entries here; the panel
+  re-renders the whole list from this array.
+- **`eventConfig.confirmation.instructions`** — the copy shown for step 04,
+  "Confirm your ticket". Currently points people at the contacts above.
+- **`eventConfig.siteUrl`** — the canonical domain used by Section 12's
+  share links. Left empty, sharing falls back to the visitor's current
+  browser URL, so Copy Link/WhatsApp/X/Facebook all work correctly today.
+- **`eventConfig.socials.*`** — the footer only ever renders a social link
+  that has a real URL here; empty values stay hidden completely (icon and
+  list item), never a placeholder link to a fake profile.
+
+Relevant files: `scripts/config.js` (data), `scripts/tickets.js` (Section 11
+logic), `scripts/share.js` (Section 12 logic), `scripts/footer.js` (Section 14
+logic), `styles/components/tickets.css`, `share.css`, `final-cta.css`.
+
+The footer also carries three brand marks —
+`assets/images/logo-umsa.png`, `logo-unimed.png` and `logo-tla.png` — cropped
+from official artwork with transparent backgrounds. Swap the files (same
+names) to update any of the three without touching `index.html`.
+
 ## Replacing the video placeholder
 
 Put the files in `assets/video/`, then in section 5 of `index.html` replace the
@@ -191,12 +232,12 @@ icons in `site.webmanifest`.
   JSON-LD) and in `robots.txt` with the real domain.
 - Point the two "Get your ticket" buttons (`href="#tickets"`) at the real ticket
   flow once it exists. They currently jump to the event detail band.
-- **Venue check:** the brief says *NIPER Field* and the flyer artwork reads
-  *NIEPA Field*. The site uses NIPER Field in the HTML, the JSON-LD and the
-  nav panel. Confirm the correct spelling and update those three places.
 - No performers, sponsors, programme, payment details, phone numbers or social
   handles have been invented. Nothing on the page claims information that was
   not supplied.
+- Fill in `scripts/config.js` (`eventConfig.payment`, `.confirmation`,
+  `.siteUrl`, `.socials`) as each of those becomes available — see
+  "Sections 11–14" below for what each field controls.
 
 ## Accessibility and performance notes
 

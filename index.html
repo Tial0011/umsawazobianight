@@ -48,6 +48,9 @@
 <link rel="stylesheet" href="styles/components/waiting.css">
 <link rel="stylesheet" href="styles/components/programme.css">
 <link rel="stylesheet" href="styles/components/countdown.css">
+<link rel="stylesheet" href="styles/components/tickets.css">
+<link rel="stylesheet" href="styles/components/share.css">
+<link rel="stylesheet" href="styles/components/final-cta.css">
 <link rel="stylesheet" href="styles/components/footer.css">
 
 <script type="application/ld+json">
@@ -75,8 +78,8 @@
   "description": "A cultural night celebrating Nigeria's languages, dress, music and traditions.",
   "image": "https://example.com/assets/images/og-wazobia-night-2026.jpg",
   "offers": [
-    { "@type": "Offer", "name": "UMSA", "price": "2000", "priceCurrency": "NGN", "availability": "https://schema.org/InStock" },
-    { "@type": "Offer", "name": "Non-UMSA", "price": "3500", "priceCurrency": "NGN", "availability": "https://schema.org/InStock" }
+    { "@type": "Offer", "name": "UMSAites", "price": "2000", "priceCurrency": "NGN", "availability": "https://schema.org/InStock" },
+    { "@type": "Offer", "name": "Non-UMSAites", "price": "3500", "priceCurrency": "NGN", "availability": "https://schema.org/InStock" }
   ]
 }
 </script>
@@ -101,7 +104,7 @@
         <li><a href="#beyond">Beyond</a></li>
         <li><a href="#experience">Experience</a></li>
       </ul>
-      <a class="btn btn--primary btn--sm" href="#tickets">Get your ticket</a>
+      <a class="btn btn--primary btn--sm" href="#tickets" data-ticket-cta data-ticket-pending>Get your ticket</a>
     </nav>
 
     <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-menu" data-nav-toggle>
@@ -122,7 +125,7 @@
     </nav>
     <div class="nav__panel-foot">
       <p class="nav__panel-meta">1 October 2026 · 4:00 PM<br>NIEPA Field, UNIMED Ondo</p>
-      <a class="btn btn--primary btn--block" href="#tickets">Get your ticket</a>
+      <a class="btn btn--primary btn--block" href="#tickets" data-ticket-cta data-ticket-pending>Get your ticket</a>
     </div>
   </div>
 </header>
@@ -147,7 +150,7 @@
         </p>
 
         <div class="hero__actions" data-reveal="5">
-          <a class="btn btn--primary" href="#tickets">Get your ticket</a>
+          <a class="btn btn--primary" href="#tickets" data-ticket-cta data-ticket-pending>Get your ticket</a>
           <a class="btn btn--ghost" href="#wazobia" data-scroll-cue>Explore Wazobia</a>
         </div>
       </div>
@@ -155,7 +158,7 @@
     <p class="visually-hidden">Wazobia Night 2026 flyer: dancers in cultural attire in front of the "Wazobia Night" display lettering in orange and red, with "1st October 2026" beneath it, framed by African print and woven-basket border art on a dark background.</p>
 
     <!-- Event detail band — echoes the black information bar on the flyer -->
-    <div class="hero__band" id="tickets" data-reveal="7">
+    <div class="hero__band" id="event-facts" data-reveal="7">
       <div class="shell hero__band-inner">
         <dl class="factbar">
           <div class="factbar__item">
@@ -484,15 +487,198 @@
       <p class="countdown__meta">1 October 2026 &middot; 4:00 PM &middot; NIEPA Field</p>
     </div>
   </section>
+
+  <!-- ============ SECTION 11 — EVENT DETAILS / GET YOUR TICKET ============ -->
+  <section class="tickets section" id="tickets" aria-labelledby="tickets-h">
+    <div class="shell tickets__head">
+      <p class="tickets__eyebrow">Event details</p>
+      <h2 class="tickets__title" id="tickets-h">Get your ticket.</h2>
+      <p class="tickets__sub">One night. Many cultures. One experience.</p>
+    </div>
+
+    <div class="shell">
+      <div class="ticket-prices" role="group" aria-label="Ticket prices">
+        <div class="ticket-card">
+          <p class="ticket-card__label">UMSAites</p>
+          <p class="ticket-card__price">&#8358;2,000</p>
+          <p class="ticket-card__note">For UMSA members.</p>
+        </div>
+        <div class="ticket-card ticket-card--nonumsa">
+          <p class="ticket-card__label">Non-UMSAites</p>
+          <p class="ticket-card__price">&#8358;3,500</p>
+          <p class="ticket-card__note">For everyone else.</p>
+        </div>
+      </div>
+
+      <ol class="pay-steps" aria-label="How to get your ticket">
+        <li class="pay-step">
+          <span class="pay-step__num" aria-hidden="true">01</span>
+          <h3 class="pay-step__title">Choose your ticket</h3>
+          <p class="pay-step__desc">UMSAites &#8212; &#8358;2,000, or Non-UMSAites &#8212; &#8358;3,500.</p>
+        </li>
+        <li class="pay-step">
+          <span class="pay-step__num" aria-hidden="true">02</span>
+          <h3 class="pay-step__title">Make payment</h3>
+          <p class="pay-step__desc">Use the official payment details below.</p>
+        </li>
+        <li class="pay-step">
+          <span class="pay-step__num" aria-hidden="true">03</span>
+          <h3 class="pay-step__title">Keep your proof</h3>
+          <p class="pay-step__desc">Save your payment receipt or transfer confirmation.</p>
+        </li>
+        <li class="pay-step">
+          <span class="pay-step__num" aria-hidden="true">04</span>
+          <h3 class="pay-step__title">Confirm your ticket</h3>
+          <p class="pay-step__desc" data-confirmation-text>After payment, send your receipt to the Financial Secretary or Treasurer listed in the payment details below.</p>
+        </li>
+      </ol>
+
+      <div class="payment-panel" id="payment-instructions" data-payment-info>
+        <p class="payment-panel__title">Payment details</p>
+        <p class="payment-info__pending" data-payment-pending hidden>Payment details coming soon.</p>
+        <dl class="payment-info__grid" data-payment-details>
+          <div class="payment-info__row">
+            <dt>Bank name</dt>
+            <dd data-payment-bank>Coming soon</dd>
+          </div>
+          <div class="payment-info__row">
+            <dt>Account number</dt>
+            <dd data-payment-account>2392045814</dd>
+          </div>
+          <div class="payment-info__row">
+            <dt>Account name</dt>
+            <dd data-payment-name>UMSA TRUST FUND UNIMED</dd>
+          </div>
+        </dl>
+
+        <p class="payment-panel__subtitle">Payment enquiries &amp; receipt submission</p>
+        <ul class="payment-contacts" data-payment-contacts>
+          <li class="payment-contact">
+            <span class="payment-contact__role">Financial Secretary</span>
+            <span class="payment-contact__name">Abass</span>
+            <span class="payment-contact__links">
+              <a href="tel:+2349166055878">+234 916 605 5878</a>
+              <a href="https://wa.me/2349166055878" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+            </span>
+          </li>
+          <li class="payment-contact">
+            <span class="payment-contact__role">Treasurer</span>
+            <span class="payment-contact__name">Areta</span>
+            <span class="payment-contact__links">
+              <a href="tel:+2347013361189">+234 701 336 1189</a>
+              <a href="https://wa.me/2347013361189" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+            </span>
+          </li>
+        </ul>
+
+        <noscript>
+          <p class="payment-info__pending">Account number: 2392045814 &middot; Account name: UMSA TRUST FUND UNIMED. Bank name coming soon. For payment enquiries or to send your receipt, contact the Financial Secretary (+234 916 605 5878) or Treasurer (+234 701 336 1189).</p>
+        </noscript>
+      </div>
+
+      <div class="tickets__cta">
+        <a class="btn btn--primary" href="#payment-instructions" data-ticket-cta data-ticket-pending>Get your ticket</a>
+        <p class="tickets__cta-note">Ticket confirmation and payment details will appear here as soon as they're ready.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 12 — SHARE THE NIGHT ============ -->
+  <section class="share section" id="share" aria-labelledby="share-h">
+    <div class="shell share__head">
+      <h2 class="share__title" id="share-h">Share the <span>night.</span></h2>
+      <p class="share__sub">Bring somebody with you.</p>
+    </div>
+
+    <div class="shell share__actions">
+      <button class="btn btn--primary share__native" type="button" data-share-native hidden>
+        <span aria-hidden="true">&#10148;</span>&nbsp;Share
+      </button>
+
+      <a class="btn btn--primary share__whatsapp" data-share-whatsapp href="https://wa.me/" target="_blank" rel="noopener noreferrer">
+        Share on WhatsApp
+      </a>
+
+      <button class="btn btn--ghost share__copy" type="button" data-share-copy>
+        <span data-share-copy-label>Copy link</span>
+      </button>
+
+      <div class="share__row">
+        <a class="btn btn--ghost share__x" data-share-x href="https://twitter.com/intent/tweet" target="_blank" rel="noopener noreferrer">Share on X</a>
+        <a class="btn btn--ghost share__facebook" data-share-facebook href="https://www.facebook.com/sharer/sharer.php" target="_blank" rel="noopener noreferrer">Share on Facebook</a>
+      </div>
+
+      <p class="visually-hidden" role="status" aria-live="polite" data-share-status></p>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 13 — WAZOBIA AWAITS / FINAL CTA ============ -->
+  <section class="final-cta section" id="final-cta" aria-labelledby="final-cta-h">
+    <div class="final-cta__pattern" aria-hidden="true"></div>
+    <div class="shell final-cta__inner">
+      <p class="final-cta__eyebrow">Come as your culture</p>
+      <h2 class="final-cta__title" id="final-cta-h">
+        <span>Wazobia</span>
+        <span class="final-cta__title-accent">awaits.</span>
+      </h2>
+      <p class="final-cta__meta">01 October 2026 &middot; NIEPA Field &middot; 4:00 PM</p>
+      <div class="final-cta__actions">
+        <a class="btn btn--primary" href="#tickets" data-ticket-cta data-ticket-pending>Get your ticket</a>
+        <a class="btn btn--ghost" href="#share">Share the night</a>
+      </div>
+    </div>
+  </section>
 </main>
 
-<footer class="footer">
+<footer class="footer" id="footer">
   <div class="shell footer__inner">
-    <p class="footer__org">
-      University of Medical Students' Association<br>
-      University of Medical Sciences, Ondo
-    </p>
-    <p class="footer__event">Wazobia Night 2026 · 1 October 2026 · NIEPA Field</p>
+    <div class="footer__brand">
+      <div class="footer__logos">
+        <img src="assets/images/logo-umsa.png" width="312" height="320" loading="lazy" decoding="async"
+             alt="UMSA — University of Medical Sciences, Ondo Medical Students' Association crest">
+        <img src="assets/images/logo-unimed.png" width="255" height="320" loading="lazy" decoding="async"
+             alt="UNIMED — University of Medical Sciences, Ondo crest">
+        <img src="assets/images/logo-tla.png" width="311" height="320" loading="lazy" decoding="async"
+             alt="The Legacy Administration (TLA) seal">
+      </div>
+      <p class="footer__brand-name">Wazobia Night 2026</p>
+      <p class="footer__org">UMSA &times; UNIMED</p>
+      <p class="footer__org-full">University of Medical Sciences, Ondo<br>The Legacy Administration</p>
+    </div>
+
+    <div class="footer__details">
+      <p class="footer__heading">Event details</p>
+      <p>01 October 2026</p>
+      <p>4:00 PM</p>
+      <p>NIEPA Field</p>
+    </div>
+
+    <nav class="footer__nav" aria-label="Footer">
+      <p class="footer__heading">Quick links</p>
+      <ul>
+        <li><a href="#wazobia">What is Wazobia</a></li>
+        <li><a href="#culture">Cultures</a></li>
+        <li><a href="#experience">The cultural experience</a></li>
+        <li><a href="#your-culture">Come as your culture</a></li>
+        <li><a href="#waiting">What's waiting for you</a></li>
+        <li><a href="#programme">The night</a></li>
+        <li><a href="#tickets">Get your ticket</a></li>
+        <li><a href="#share">Share the night</a></li>
+      </ul>
+    </nav>
+
+    <div class="footer__socials" data-footer-socials hidden>
+      <p class="footer__heading">Follow</p>
+      <ul>
+        <li hidden><a data-social="instagram" hidden target="_blank" rel="noopener noreferrer"></a></li>
+        <li hidden><a data-social="tiktok" hidden target="_blank" rel="noopener noreferrer"></a></li>
+        <li hidden><a data-social="facebook" hidden target="_blank" rel="noopener noreferrer"></a></li>
+        <li hidden><a data-social="x" hidden target="_blank" rel="noopener noreferrer"></a></li>
+        <li hidden><a data-social="whatsapp" hidden target="_blank" rel="noopener noreferrer"></a></li>
+      </ul>
+    </div>
+
+    <p class="footer__legal">&copy; 2026 Wazobia Night &middot; UMSA &middot; UNIMED</p>
   </div>
 </footer>
 

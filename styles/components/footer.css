@@ -4,18 +4,91 @@
   border-top: 4px solid var(--red);
 }
 .footer__inner {
-  padding-block: clamp(32px, 5vw, 56px);
+  padding-block: clamp(32px, 6vw, 64px);
   display: grid;
-  gap: 14px;
+  gap: clamp(28px, 5vw, 40px);
 }
-.footer__org { font-weight: 700; line-height: 1.45; }
-.footer__event {
-  font-size: var(--step--1);
-  letter-spacing: 0.1em;
+
+.footer__logos {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+.footer__logos img {
+  height: 52px;
+  width: auto;
+  background: var(--cream);
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.footer__brand-name {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 6vw, 2rem);
   text-transform: uppercase;
+  color: var(--text-dark-bg);
+}
+.footer__org {
+  margin-top: 8px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
   color: var(--gold);
 }
-@media (min-width: 900px) {
-  .footer__inner { grid-template-columns: 1fr auto; align-items: end; }
-  .footer__event { text-align: right; }
+.footer__org-full {
+  margin-top: 2px;
+  font-size: var(--step--1);
+  color: rgba(248, 232, 203, 0.7);
+}
+
+.footer__heading {
+  font-size: var(--step--1);
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+
+.footer__details p:not(.footer__heading) {
+  color: rgba(248, 232, 203, 0.85);
+  line-height: 1.7;
+}
+
+.footer__nav ul,
+.footer__socials ul {
+  display: grid;
+  gap: 10px;
+}
+.footer__nav a,
+.footer__socials a {
+  color: rgba(248, 232, 203, 0.85);
+  transition: color 160ms var(--ease);
+}
+.footer__nav a:hover,
+.footer__socials a:hover { color: var(--orange); }
+.footer__socials[hidden] { display: none; }
+.footer__socials a[hidden] { display: none; }
+.footer__socials li[hidden] { display: none; }
+
+.footer__legal {
+  padding-top: clamp(20px, 4vw, 28px);
+  border-top: 1px solid var(--rule-dark);
+  font-size: var(--step--1);
+  color: rgba(248, 232, 203, 0.6);
+}
+
+@media (min-width: 700px) {
+  .footer__inner {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .footer__legal { grid-column: 1 / -1; }
+}
+
+@media (min-width: 1100px) {
+  .footer__inner {
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    align-items: start;
+  }
+  .footer__legal { grid-column: 1 / -1; }
 }

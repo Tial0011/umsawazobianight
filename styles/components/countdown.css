@@ -5,6 +5,21 @@
   overflow: hidden;
   text-align: center;
 }
+
+/* Soft colour blooms behind the glass — this is what the frosted
+   cards below actually pick up through backdrop-filter. */
+.countdown::before {
+  content: "";
+  position: absolute;
+  inset: -15%;
+  background:
+    radial-gradient(circle at 18% 22%, rgba(241, 90, 0, 0.40), transparent 42%),
+    radial-gradient(circle at 82% 28%, rgba(216, 155, 43, 0.34), transparent 48%),
+    radial-gradient(circle at 50% 95%, rgba(201, 40, 12, 0.34), transparent 50%);
+  filter: blur(70px);
+  pointer-events: none;
+}
+
 .countdown__pattern {
   position: absolute;
   inset: 0;
@@ -14,7 +29,7 @@
     repeating-linear-gradient(-45deg, rgba(216,155,43,.06) 0 2px, transparent 2px 26px);
 }
 
-.countdown__inner { position: relative; display: grid; justify-items: center; gap: clamp(28px, 6vw, 48px); }
+.countdown__inner { position: relative; z-index: 1; display: grid; justify-items: center; gap: clamp(28px, 6vw, 48px); }
 
 .countdown__eyebrow {
   font-size: var(--step--1);
@@ -44,7 +59,15 @@
   gap: 6px;
   padding-block: clamp(14px, 3vw, 26px);
   padding-inline: 2px;
-  border: 1px solid var(--rule-dark);
+  background: rgba(248, 232, 203, 0.08);
+  border: 1px solid rgba(248, 232, 203, 0.22);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+  .countdown__stat {
+    backdrop-filter: blur(18px) saturate(160%);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+  }
 }
 .countdown__value {
   font-family: var(--font-display);
