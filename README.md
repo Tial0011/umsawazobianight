@@ -1,12 +1,17 @@
 # Wazobia Night 2026 — UMSA, UNIMED Ondo
 
-Official event site. Sections 1–5 are built:
+Official event site. Built so far:
 
 1. Hero — Wazobia Night, date, time, venue, ticket prices, CTAs
 2. What is Wazobia? — Wa / Zo / Bia
 3. Yoruba · Hausa · Igbo — culture panels
 4. And beyond. — the wider cultural picture
 5. The cultural experience — video placeholder + feature tags
+6. Come as your culture — emotional/participatory statement + placeholder art
+7. The Afro Wall — **not built yet**, waiting on real photography (see below)
+8. What's waiting for you? — editorial list of experiences
+9. The night / programme — event timeline, data-driven
+10. Live countdown — real-time countdown to doors-open, WAT-correct
 
 ## Running it
 
@@ -42,30 +47,99 @@ styles/
   base.css                  reset, shell, section rhythm, reveal animation
   components/
     navbar.css  hero.css  wazobia-intro.css  culture-cards.css
-    beyond.css  cultural-experience.css  button.css  pattern.css  footer.css
+    beyond.css  cultural-experience.css  culture-call.css  waiting.css
+    programme.css  countdown.css  button.css  pattern.css  footer.css
 scripts/
   main.js                   boots the modules
   nav.js                    sticky navbar + mobile menu (focus, Escape, scroll lock)
-  reveal.js                 IntersectionObserver entrance animation
+  reveal.js                 IntersectionObserver entrance animation (hero only)
   carousel.js               snap-scroll rail for the culture cards
   ticker.js                 slow marquee in "And beyond"
+  video-sound.js            unmute prompt for the section 5 video
+  programme.js              programme DATA + renderer for section 9 (edit here)
+  countdown.js              live countdown target + tick logic for section 10
 assets/
   images/                   flyer, Open Graph image, pattern tile, placeholder art
   video/                    drop the section 5 video here
 tools/build-single.py       bundles everything into dist/index.html (one file)
 ```
 
-## Adding the remaining sections
+## Adding a new section
 
 Append a new `<section class="… section" id="…">` inside `<main>`, add a
-matching file in `styles/components/`, link it in `<head>`, and add the nav
-entry in both the desktop list and the mobile panel in `index.html`. Nothing in
+matching file in `styles/components/`, link it in `<head>`. Nothing in
 sections 1–5 needs to change. Existing patterns to reuse:
 
 - `.shell` for the max-width container and side padding
 - `.section` for vertical rhythm
 - `.btn .btn--primary` / `.btn--ghost` for actions
-- `data-reveal="1..7"` on an element to give it an entrance animation
+- `data-reveal="1..7"` on an element to give it an entrance animation (used
+  only in the hero, deliberately — see the design notes in section 6–10's
+  brief; don't scatter it onto every section)
+
+Note: the nav (desktop list + mobile panel) currently links only sections
+1–5. Sections 6–10 were intentionally left out of the nav for this pass, since
+adding five more links risked crowding the existing navbar layout, which the
+brief asked not to redesign. Add entries there yourself if you want them
+directly reachable from the menu — the pattern to copy is already in
+`index.html` (`.nav__list` and `.nav__panel-list`).
+
+## Section 9 — editing the programme
+
+The running order lives entirely in `scripts/programme.js`, as a plain array:
+
+```js
+export const programme = [
+  { time: '04:00 PM', title: 'Doors Open', description: '…' },
+  { time: '', title: 'Coming Soon', description: '…', placeholder: true },
+];
+```
+
+- `time` — shown as the row's time label; leave it `''` for a slot with no
+  confirmed time yet (it renders as a blank spacer instead of "undefined").
+- `placeholder: true` — dims the row and hollows out its timeline dot, so
+  unconfirmed slots read visually as "TBA" rather than as a real item.
+- The list is rendered into `<ol data-programme-list>` by `initProgramme()` in
+  the same file. There's a static `<noscript>` fallback right after it in
+  `index.html` — update that too if you change the first few entries, so
+  visitors without JavaScript still see accurate placeholder text.
+
+## Section 10 — changing the countdown date/time
+
+Open `scripts/countdown.js` and edit one line:
+
+```js
+const TARGET_UTC_MS = Date.UTC(2026, 9, 1, 15, 0, 0); // year, month (0-based!), day, hour, minute, second — in UTC
+```
+
+The countdown is deliberately written in **UTC**, not the browser's local
+time, so it counts down correctly for every visitor regardless of their
+device's timezone. Nigeria (WAT) is UTC+1 with no daylight saving, so convert
+any new WAT time by subtracting one hour: 4:00 PM WAT → 15:00 UTC. Remember
+`Date.UTC`'s month argument is zero-based (`9` = October).
+
+If you also change the date/time, update the matching `startDate` in the
+`Event` JSON-LD block near the top of `index.html`, and the `.countdown__meta`
+and `.hero__band` text, so the page doesn't contradict itself.
+
+## Adding Section 7 — The Afro Wall
+
+Section 7 was intentionally skipped: it needs real event photography, which
+hadn't been supplied at the time these sections were built. A marked gap is
+left between Section 6 (`#your-culture`) and Section 8 (`#waiting`) in
+`index.html` — search for `SECTION 7 — THE AFRO WALL` to find it. To add it
+later:
+
+1. Gather the real photographs and optimise them for web (WebP, sensible
+   dimensions — a wall/grid layout usually wants square or portrait crops).
+2. Build the section using the same tokens and patterns as sections 6–10
+   (`.shell`, `.section`, the palette in `tokens.css`, `Anton`/`Manrope`) so it
+   reads as part of the same site.
+3. Add `styles/components/afro-wall.css` and link it in `<head>`, in the same
+   position in the list as the other section stylesheets.
+4. Insert the `<section>` markup at the marked gap, between Sections 6 and 8.
+5. Update the section-order comments in this README and in `index.html` once
+   it's in.
 
 ## Replacing the video placeholder
 

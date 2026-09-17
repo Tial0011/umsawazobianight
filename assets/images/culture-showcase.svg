@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1100" width="900" height="1100" role="img" aria-label="Placeholder artwork representing cultural attire and celebration">
+  <rect width="900" height="1100" fill="#11100E"/>
+
+  <!-- woven diamond field -->
+  <g fill="none" stroke="#8E1B0D" stroke-width="3" opacity="0.55">
+    <path d="M0 140 L112 40 L224 140 L336 40 L448 140 L560 40 L672 140 L784 40 L900 140"/>
+    <path d="M0 320 L112 220 L224 320 L336 220 L448 320 L560 220 L672 320 L784 220 L900 320"/>
+    <path d="M0 500 L112 400 L224 500 L336 400 L448 500 L560 400 L672 500 L784 400 L900 500"/>
+    <path d="M0 680 L112 580 L224 680 L336 580 L448 680 L560 580 L672 680 L784 580 L900 680"/>
+    <path d="M0 860 L112 760 L224 860 L336 760 L448 860 L560 760 L672 860 L784 760 L900 860"/>
+    <path d="M0 1040 L112 940 L224 1040 L336 940 L448 1040 L560 940 L672 1040 L784 940 L900 1040"/>
+  </g>
+
+  <!-- large concentric arc, echoing the culture-card motif at bigger scale -->
+  <path d="M120 980 a330 330 0 0 1 660 0" fill="none" stroke="#F15A00" stroke-width="8" opacity="0.85"/>
+  <path d="M40 980 a410 410 0 0 1 820 0" fill="none" stroke="#D89B2B" stroke-width="8" opacity="0.55"/>
+
+  <!-- diamond accents -->
+  <g fill="#F15A00">
+    <path d="M170 230 l34 34 l-34 34 l-34 -34 Z"/>
+    <path d="M730 230 l34 34 l-34 34 l-34 -34 Z"/>
+  </g>
+  <g fill="#C9280C">
+    <path d="M450 130 l30 30 l-30 30 l-30 -30 Z"/>
+  </g>
+  <g fill="#D89B2B">
+    <path d="M340 600 l26 26 l-26 26 l-26 -26 Z"/>
+    <path d="M560 600 l26 26 l-26 26 l-26 -26 Z"/>
+  </g>
+</svg>

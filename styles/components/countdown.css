@@ -1,0 +1,90 @@
+.countdown {
+  position: relative;
+  background: var(--ink);
+  color: var(--text-dark-bg);
+  overflow: hidden;
+  text-align: center;
+}
+.countdown__pattern {
+  position: absolute;
+  inset: 0;
+  opacity: 0.45;
+  background-image:
+    repeating-linear-gradient(45deg,  rgba(241,90,0,.06) 0 2px, transparent 2px 26px),
+    repeating-linear-gradient(-45deg, rgba(216,155,43,.06) 0 2px, transparent 2px 26px);
+}
+
+.countdown__inner { position: relative; display: grid; justify-items: center; gap: clamp(28px, 6vw, 48px); }
+
+.countdown__eyebrow {
+  font-size: var(--step--1);
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.countdown__title {
+  font-size: var(--display-sm);
+  line-height: 0.9;
+  max-width: 16ch;
+}
+.countdown__title-line { display: block; color: var(--text-dark-bg); }
+.countdown__title-line--accent { color: var(--orange); margin-top: 0.08em; }
+
+.countdown__stats {
+  width: 100%;
+  max-width: 640px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+.countdown__stat {
+  min-width: 0;
+  display: grid;
+  gap: 6px;
+  padding-block: clamp(14px, 3vw, 26px);
+  padding-inline: 2px;
+  border: 1px solid var(--rule-dark);
+}
+.countdown__value {
+  font-family: var(--font-display);
+  font-variant-numeric: tabular-nums;
+  font-size: clamp(1.7rem, 8vw, 4.4rem);
+  line-height: 1;
+  color: var(--text-dark-bg);
+}
+.countdown__stat:nth-child(2) .countdown__value { color: var(--orange); }
+.countdown__stat:nth-child(3) .countdown__value { color: var(--gold); }
+.countdown__stat:nth-child(4) .countdown__value { color: var(--red); }
+.countdown__label {
+  font-size: clamp(0.62rem, 2.4vw, 0.8rem);
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(248, 232, 203, 0.7);
+}
+
+.countdown__done { display: grid; gap: 10px; }
+.countdown__done[hidden] { display: none; }
+.countdown__done-text {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 9vw, 4rem);
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+.countdown__done-text span { color: var(--orange); }
+
+.countdown__meta { color: rgba(248, 232, 203, 0.65); font-size: var(--step--1); }
+.countdown__noscript { color: rgba(248, 232, 203, 0.75); max-width: 46ch; }
+
+@media (min-width: 640px) {
+  .countdown__stats { gap: 18px; }
+  .countdown__stat { padding-block: 30px; }
+}
+
+@media (min-width: 900px) {
+  .countdown__title { max-width: 20ch; }
+  .countdown__stats { max-width: 960px; gap: 24px; }
+  .countdown__stat { padding-block: 40px; }
+  .countdown__value { font-size: clamp(4.4rem, 6vw, 6.4rem); }
+}

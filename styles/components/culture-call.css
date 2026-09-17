@@ -1,0 +1,85 @@
+.culture-call {
+  position: relative;
+  background: var(--ink);
+  color: var(--text-dark-bg);
+  overflow: hidden;
+}
+
+.culture-call__grid { display: grid; gap: clamp(36px, 8vw, 56px); }
+
+.culture-call__title {
+  font-size: clamp(2.6rem, 15vw, 5.4rem);
+  line-height: 0.86;
+  color: var(--text-dark-bg);
+}
+.culture-call__title-line { display: block; }
+.culture-call__title-line--dominant { color: var(--orange); margin-top: 0.06em; }
+.culture-call__title-line--dominant ~ .culture-call__title-line--dominant { color: var(--red); }
+
+.culture-call__kicker {
+  margin-top: clamp(18px, 4vw, 28px);
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 5vw, 1.6rem);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.culture-call__text {
+  margin-top: 16px;
+  max-width: 46ch;
+  color: rgba(248, 232, 203, 0.8);
+}
+
+.culture-call__media {
+  position: relative;
+  border-bottom: 5px solid var(--orange);
+}
+.culture-call__media img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; }
+.culture-call__media::after {
+  content: "Photo placeholder";
+  position: absolute;
+  left: 0; bottom: 0;
+  padding: 6px 10px;
+  background: var(--ink);
+  color: var(--gold);
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.culture-call__cta {
+  margin-top: clamp(24px, 5vw, 34px);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 4vw, 1.2rem);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-dark-bg);
+  padding-bottom: 6px;
+  border-bottom: 2px solid var(--orange);
+}
+.culture-call__cta span { transition: transform 200ms var(--ease); }
+.culture-call__cta:hover span { transform: translateX(4px); }
+@media (prefers-reduced-motion: reduce) {
+  .culture-call__cta:hover span { transform: none; }
+}
+
+@media (min-width: 900px) {
+  .culture-call__grid {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    align-items: center;
+    gap: 64px;
+  }
+  .culture-call__copy { order: 1; }
+  .culture-call__media { order: 2; align-self: stretch; margin-block: -48px; }
+  .culture-call__media img { height: 100%; aspect-ratio: auto; }
+}
+
+@media (min-width: 1200px) {
+  .culture-call__grid { gap: 96px; }
+  .culture-call__media { margin-block: -80px; }
+}

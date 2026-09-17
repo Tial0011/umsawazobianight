@@ -43,12 +43,17 @@ html = re.sub(r'\s*<link rel="stylesheet" href="styles/[^"]+">', "", html)
 html = html.replace("</head>", "<style>\n" + "\n".join(css_parts) + "\n</style>\n</head>")
 
 # ---- JS: flatten the ES modules into one classic script ---------------------
-order = ["nav.js", "reveal.js", "carousel.js", "ticker.js", "main.js"]
+order = [
+    "nav.js", "reveal.js", "carousel.js", "ticker.js", "video-sound.js",
+    "programme.js", "countdown.js", "main.js",
+]
 js = []
 for name in order:
     src = (ROOT / "scripts" / name).read_text()
     src = re.sub(r'^\s*import .*?;\s*$', "", src, flags=re.M)
-    src = src.replace("export function", "function")
+    # Strip the "export " keyword from any export (function/const/let/var),
+    # since the bundled output is a plain classic script, not a module.
+    src = re.sub(r'^export\s+', "", src, flags=re.M)
     js.append(src)
 html = html.replace(
     '<script type="module" src="scripts/main.js"></script>',

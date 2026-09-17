@@ -59,7 +59,8 @@ button { font: inherit; color: inherit; }
 
 /* Display type helper used by headings */
 .display, .hero__title, .intro__title, .cultures__title,
-.beyond__title, .experience__title, .syllable__word {
+.beyond__title, .experience__title, .syllable__word,
+.culture-call__title, .waiting__title, .programme__title, .countdown__title {
   font-family: var(--font-display);
   letter-spacing: 0.005em;
   text-transform: uppercase;

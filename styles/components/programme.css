@@ -1,0 +1,70 @@
+.programme { background: var(--cream-2); }
+
+.programme__head { display: grid; gap: 14px; }
+.programme__title {
+  font-size: var(--display-sm);
+  line-height: 0.9;
+  color: var(--ink);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.18em;
+}
+.programme__title-slash { color: var(--red); }
+.programme__title-sub { color: var(--ink); }
+.programme__sub { max-width: 42ch; color: rgba(23,19,15,.75); }
+
+.programme__timeline {
+  margin-top: clamp(36px, 6vw, 64px);
+  position: relative;
+  padding-left: 28px;
+}
+.programme__timeline::before {
+  content: "";
+  position: absolute;
+  left: 6px; top: 6px; bottom: 6px;
+  width: 2px;
+  background: var(--ink);
+}
+.programme__row { position: relative; padding-bottom: clamp(28px, 5vw, 40px); }
+.programme__row:last-child { padding-bottom: 0; }
+.programme__dot {
+  position: absolute;
+  left: -28px; top: 4px;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: var(--orange);
+  border: 3px solid var(--cream-2);
+  outline: 2px solid var(--ink);
+}
+.programme__row:nth-child(3n+2) .programme__dot { background: var(--red); }
+.programme__row:nth-child(3n) .programme__dot { background: var(--gold); }
+.programme__time {
+  font-family: var(--font-display);
+  font-size: var(--step--1);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--red-deep);
+}
+.programme__row-title {
+  margin-top: 4px;
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 5.6vw, 1.8rem);
+  text-transform: uppercase;
+  line-height: 1.05;
+  color: var(--ink);
+}
+.programme__row-desc { margin-top: 6px; max-width: 44ch; font-size: var(--step--1); color: rgba(23,19,15,.7); }
+.programme__row--placeholder .programme__row-title { color: rgba(23,19,15,.45); }
+.programme__row--placeholder .programme__dot { background: transparent; border-color: var(--ink); }
+
+.programme__noscript { max-width: 60ch; color: rgba(23,19,15,.75); }
+
+@media (min-width: 900px) {
+  .programme__head { max-width: 64ch; }
+  .programme__timeline { max-width: 760px; padding-left: 44px; }
+  .programme__timeline::before { left: 9px; }
+  .programme__dot { left: -44px; width: 20px; height: 20px; top: 2px; }
+  .programme__time { font-size: var(--step-0); }
+  .programme__row-title { font-size: clamp(1.6rem, 2.6vw, 2.1rem); }
+}
