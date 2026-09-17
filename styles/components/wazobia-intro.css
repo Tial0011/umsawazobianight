@@ -12,6 +12,8 @@
 
 .intro__head { display: grid; gap: 20px; }
 .intro__title { font-size: var(--display-sm); color: var(--ink); line-height: 0.86; }
+.intro__title-line { display: block; }
+.intro__title-line--second { margin-top: 0.12em; }
 .intro__text { max-width: 52ch; color: rgba(23,19,15,.8); }
 .intro__text em { font-style: italic; color: var(--red); font-weight: 700; }
 

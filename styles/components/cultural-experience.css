@@ -6,6 +6,8 @@
   line-height: 0.86;
   color: var(--ink);
 }
+.experience__title-line { display: block; }
+.experience__title-line + .experience__title-line { margin-top: 0.12em; }
 .experience__lines { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 14px; }
 .experience__lines span {
   font-family: var(--font-display);
