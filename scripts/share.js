@@ -6,6 +6,8 @@ const WHATSAPP_TEXT =
 const X_TEXT =
   'Wazobia Night 2026 \u2014 one night, many cultures, one Nigeria. 01 October 2026 \u00B7 NIEPA Field \u00B7 4:00 PM.';
 const NATIVE_TEXT = 'Join UMSA Wazobia Night 2026 \u2014 01 October 2026, NIEPA Field, 4:00 PM.';
+const INSTAGRAM_TEXT =
+  'Wazobia Night 2026 \u2014 one night, many cultures, one Nigeria. 01 October 2026 \u00B7 NIEPA Field \u00B7 4:00 PM.';
 
 function getShareUrl() {
   const configured = eventConfig.siteUrl.trim();
@@ -42,7 +44,7 @@ export function initShare() {
 
   const whatsappLink = document.querySelector('[data-share-whatsapp]');
   const xLink = document.querySelector('[data-share-x]');
-  const facebookLink = document.querySelector('[data-share-facebook]');
+  const instagramBtn = document.querySelector('[data-share-instagram]');
   const copyBtn = document.querySelector('[data-share-copy]');
   const nativeBtn = document.querySelector('[data-share-native]');
 
@@ -52,8 +54,33 @@ export function initShare() {
   if (xLink) {
     xLink.href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(X_TEXT)}&url=${encodeURIComponent(url)}`;
   }
-  if (facebookLink) {
-    facebookLink.href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+  // Instagram has no web share endpoint for links: nothing can pre-fill a
+  // post or story from a URL. So this copies the caption and link, then
+  // opens Instagram, leaving the person one paste away from posting. On
+  // phones the native share button above hands off to the Instagram app
+  // directly, which is the smoother route where it exists.
+  if (instagramBtn) {
+    const label = instagramBtn.querySelector('[data-share-instagram-label]');
+    const defaultLabel = label ? label.textContent : 'Share on Instagram';
+    let resetTimer;
+
+    instagramBtn.addEventListener('click', async () => {
+      const caption = `${INSTAGRAM_TEXT} ${url}`;
+      try {
+        await copyToClipboard(caption);
+        if (label) label.textContent = 'Caption copied \u2713';
+        instagramBtn.setAttribute('data-copied', 'true');
+        announce('Caption and link copied. Paste them into your Instagram post or story.');
+      } catch {
+        announce('Could not copy the caption. Please copy the link and paste it into Instagram.');
+      }
+      window.open('https://www.instagram.com/', '_blank', 'noopener,noreferrer');
+      clearTimeout(resetTimer);
+      resetTimer = setTimeout(() => {
+        if (label) label.textContent = defaultLabel;
+        instagramBtn.removeAttribute('data-copied');
+      }, 2400);
+    });
   }
 
   if (copyBtn) {

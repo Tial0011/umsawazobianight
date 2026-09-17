@@ -13,7 +13,7 @@ Official event site. Built so far:
 9. The night / programme — event timeline, data-driven
 10. Live countdown — real-time countdown to doors-open, WAT-correct
 11. Get your ticket — pricing, how-to-pay steps, payment panel (config-driven)
-12. Share the night — WhatsApp/X/Facebook/copy-link, native share on mobile
+12. Share the night — WhatsApp/X/Instagram/copy-link, native share on mobile
 13. Wazobia awaits — final CTA
 14. Footer — event details, quick links, socials (config-driven)
 
@@ -198,10 +198,9 @@ when any of the following arrive:
   points at it and opens in a new tab. Until then they all point at safe,
   real in-page anchors (`#tickets`, `#payment-instructions`) — never a bare
   `#` and never a fake checkout.
-- **`eventConfig.payment.bankName`** — currently empty, so the Section 11
-  payment panel shows "Coming soon" for just this one field while account
-  number and account name (already confirmed) render normally. Each of the
-  three fields renders independently — none of them wait on the others.
+- **`eventConfig.payment.bankName`** — set to UBA (United Bank for Africa).
+  Each of the three payment fields renders independently, so any one of them
+  can be changed or emptied without affecting the others.
 - **`eventConfig.payment.contacts`** — the people to contact for payment
   enquiries and for sending proof of payment, rendered with tap-to-call and
   tap-to-WhatsApp links. Add, remove or edit entries here; the panel
@@ -209,11 +208,20 @@ when any of the following arrive:
 - **`eventConfig.confirmation.instructions`** — the copy shown for step 04,
   "Confirm your ticket". Currently points people at the contacts above.
 - **`eventConfig.siteUrl`** — the canonical domain used by Section 12's
-  share links. Left empty, sharing falls back to the visitor's current
-  browser URL, so Copy Link/WhatsApp/X/Facebook all work correctly today.
+  share links, set to <https://umsawazobianight.netlify.app/>. Left empty, it
+  falls back to the visitor's current browser URL.
 - **`eventConfig.socials.*`** — the footer only ever renders a social link
   that has a real URL here; empty values stay hidden completely (icon and
   list item), never a placeholder link to a fake profile.
+
+### Section 12 — why Instagram behaves differently
+
+Instagram has no web endpoint that accepts a shared link: nothing can pre-fill
+a post or story from a URL the way WhatsApp and X do. The Instagram button
+therefore copies the caption plus the link to the clipboard and opens
+instagram.com, leaving one paste between the visitor and a post. On phones the
+native Share button above it hands off to the Instagram app directly, which is
+the smoother route where it exists.
 
 Relevant files: `scripts/config.js` (data), `scripts/tickets.js` (Section 11
 logic), `scripts/share.js` (Section 12 logic), `scripts/footer.js` (Section 14

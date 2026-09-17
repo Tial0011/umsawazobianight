@@ -31,24 +31,6 @@
   color: rgba(248, 232, 203, 0.8);
 }
 
-.culture-call__media {
-  position: relative;
-  border-bottom: 5px solid var(--orange);
-}
-.culture-call__media img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; }
-.culture-call__media::after {
-  content: "Photo placeholder";
-  position: absolute;
-  left: 0; bottom: 0;
-  padding: 6px 10px;
-  background: var(--ink);
-  color: var(--gold);
-  font-size: 0.62rem;
-  font-weight: 800;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
 .culture-call__cta {
   margin-top: clamp(24px, 5vw, 34px);
   display: inline-flex;
@@ -70,17 +52,6 @@
 }
 
 @media (min-width: 900px) {
-  .culture-call__grid {
-    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-    align-items: center;
-    gap: 64px;
-  }
-  .culture-call__copy { order: 1; }
-  .culture-call__media { order: 2; align-self: stretch; margin-block: -48px; }
-  .culture-call__media img { height: 100%; aspect-ratio: auto; }
-}
-
-@media (min-width: 1200px) {
-  .culture-call__grid { gap: 96px; }
-  .culture-call__media { margin-block: -80px; }
+  .culture-call__grid { gap: 64px; }
+  .culture-call__copy { max-width: 68ch; }
 }

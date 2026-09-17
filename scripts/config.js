@@ -24,12 +24,11 @@ export const eventConfig = {
     nonUmsa: 3500,
   },
 
-  // Fill in bankName once it's confirmed — everything else here is
-  // already official. The Section 11 payment panel renders each of
-  // these independently, so a still-missing field (bankName) shows
-  // its own "coming soon" placeholder without hiding the rest.
+  // The Section 11 payment panel renders each of these independently,
+  // so any field left empty shows its own "coming soon" placeholder
+  // without hiding the rest.
   payment: {
-    bankName: '',
+    bankName: 'UBA (United Bank for Africa)',
     accountNumber: '2392045814',
     accountName: 'UMSA TRUST FUND UNIMED',
     paymentLink: '',
@@ -54,10 +53,9 @@ export const eventConfig = {
   // stays hidden rather than pointing at an invented destination.
   afroWallSubmissionUrl: '',
 
-  // The live domain, once known, e.g. "https://wazobianight.com/".
-  // Used for sharing; falls back to the browser's current URL
-  // when empty, so Share/Copy Link still work correctly today.
-  siteUrl: '',
+  // The live domain. Used for sharing, so shared links always point at
+  // the real site rather than whatever URL the visitor happens to be on.
+  siteUrl: 'https://umsawazobianight.netlify.app/',
 
   // Only a link that is filled in here will ever be shown or
   // linked to from the site.
