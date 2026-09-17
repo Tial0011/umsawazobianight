@@ -2,26 +2,38 @@
   position: relative;
   padding-top: 8px;
   isolation: isolate;
+  overflow: hidden;
 }
 
+/* ---- flyer photo as the full-bleed hero background ---- */
 .hero__wall {
   position: absolute;
-  inset: 0 0 auto 0;
-  height: 62%;
+  inset: 0;
   z-index: -1;
-  opacity: 0.85;
-  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 55%, transparent 100%);
-  mask-image: linear-gradient(180deg, #000 0%, #000 55%, transparent 100%);
+  background-image: image-set(
+    url("../../assets/images/flyer-full.webp") type("image/webp") 1x,
+    url("../../assets/images/flyer-full.jpg") type("image/jpeg") 1x
+  );
+  background-size: cover;
+  background-position: top center;
+}
+.hero__wall::before {
+  /* legibility scrim: darkest low (behind copy + band), lighter toward the top */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(17,16,14,.55) 0%, rgba(17,16,14,.72) 46%, rgba(17,16,14,.93) 100%);
 }
 
-.hero__inner { display: grid; gap: 28px; padding-bottom: 38px; }
+.hero__inner { display: flex; flex-direction: column; justify-content: center; min-height: min(86svh, 720px); gap: 28px; padding-bottom: 38px; }
 
 .hero__eyebrow {
   font-size: var(--step--1);
   font-weight: 800;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--red-deep);
+  color: var(--gold);
   display: flex;
   align-items: center;
   gap: 12px;
@@ -30,7 +42,7 @@
   content: "";
   flex: 1;
   height: 2px;
-  background: linear-gradient(90deg, var(--red-deep), transparent);
+  background: linear-gradient(90deg, var(--gold), transparent);
 }
 
 .hero__title {
@@ -38,16 +50,17 @@
   font-size: var(--display);
   line-height: 0.82;
   letter-spacing: -0.005em;
+  text-shadow: 0 6px 28px rgba(0, 0, 0, 0.35);
 }
 .hero__title-line { display: block; }
 .hero__title-line--wa { color: var(--orange); }
-.hero__title-line--night { color: var(--red); margin-left: 0.06em; }
+.hero__title-line--night { color: var(--red); margin-left: 0.06em; margin-top: 0.12em; }
 
 .hero__lede {
   margin-top: 20px;
   max-width: 46ch;
   font-size: var(--step-0);
-  color: rgba(23, 19, 15, 0.82);
+  color: rgba(248, 232, 203, 0.88);
 }
 
 .hero__actions {
@@ -56,27 +69,13 @@
   flex-wrap: wrap;
   gap: 12px;
 }
-
-/* ---- artwork: the flyer, never cropped or stretched ---- */
-.hero__art {
-  margin: 4px auto 0;
-  width: min(72%, 320px);
-  position: relative;
+/* the ghost button assumes a light background elsewhere on the page —
+   flip it to light-on-photo here so it stays visible over the flyer */
+.hero__actions .btn--ghost {
+  --btn-fg: var(--text-dark-bg);
+  border-color: var(--text-dark-bg);
 }
-.hero__art::before {
-  content: "";
-  position: absolute;
-  inset: 12px -14px -14px 12px;
-  background: var(--ink);
-  z-index: -1;
-}
-.hero__art img {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 870 / 1080;
-  object-fit: contain;
-  background: var(--cream-2);
-}
+.hero__actions .btn--ghost:hover { --btn-bg: var(--text-dark-bg); --btn-fg: var(--ink); }
 
 /* ---- black information band ---- */
 .hero__band {
@@ -118,20 +117,12 @@
   .hero { display: flex; flex-direction: column; min-height: 100svh; padding-top: 0; }
   .hero__inner {
     flex: 1;
-    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
-    align-items: center;
-    gap: 56px;
+    min-height: 0;
+    justify-content: center;
     padding-block: clamp(32px, 5vh, 72px);
   }
-  .hero__wall { height: 100%; }
-  .hero__art { margin: 0; justify-self: end; width: 100%; max-width: 440px; }
-  .hero__art::before { inset: 20px -22px -22px 20px; }
+  .hero__copy { max-width: 640px; }
   .hero__band-inner { padding-block: 26px; }
   .factbar { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 24px; }
   .factbar__item + .factbar__item { padding-left: 24px; border-left: 1px solid var(--rule-dark); }
-}
-
-@media (min-width: 1200px) {
-  .hero__inner { gap: 80px; }
-  .hero__art { max-width: 500px; }
 }

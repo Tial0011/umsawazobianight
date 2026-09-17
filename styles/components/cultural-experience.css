@@ -6,13 +6,14 @@
   line-height: 0.86;
   color: var(--ink);
 }
-.experience__lines { display: grid; gap: 2px; }
+.experience__lines { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 14px; }
 .experience__lines span {
   font-family: var(--font-display);
   font-size: clamp(1.15rem, 5vw, 1.6rem);
   text-transform: uppercase;
   letter-spacing: 0.04em;
   color: var(--red);
+  white-space: nowrap;
 }
 .experience__lines span:nth-child(even) { color: var(--ink); }
 
@@ -98,12 +99,23 @@
 .tags li:nth-child(3n+1) { background: var(--ink); color: var(--text-dark-bg); }
 
 @media (min-width: 900px) {
-  .experience__head {
+  /* lay the copy and the video frame out inline (side by side) instead
+     of stacking the video full-width beneath the heading */
+  .experience > .shell {
+    display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    align-items: end;
-    gap: 64px;
+    column-gap: 64px;
+    row-gap: 40px;
+    align-items: center;
+    grid-template-areas:
+      "head  video"
+      "tags  video";
   }
-  .experience__lines { justify-self: start; }
-  .video-frame { width: min(100%, 66%); margin-inline: auto; padding: 14px; }
-  .tags { justify-content: center; gap: 14px; }
+  .experience__head { grid-area: head; grid-template-columns: none; gap: 22px; align-items: start; }
+  .video-frame { grid-area: video; align-self: center; width: 100%; margin-top: 0; padding: 14px; }
+  .tags { grid-area: tags; align-self: start; margin-top: 0; }
+}
+
+@media (min-width: 1200px) {
+  .experience > .shell { column-gap: 88px; }
 }
