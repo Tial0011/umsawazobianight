@@ -3,7 +3,7 @@
      same as canonical / og:url / twitter:image in index.html and robots.txt -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://example.com/</loc>
+    <loc>https://umsawazobianight.netlify.app/</loc>
     <lastmod>2026-09-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
