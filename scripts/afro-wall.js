@@ -4,31 +4,48 @@
    A community photo wall: people send in their Afro looks and
    they go up here. The wall is rendered from the data array
    below, so growing it means adding objects — never touching
-   the layout, the CSS or the lightbox.
+   the layout, the CSS or the lightbox. Photos and short video
+   clips both work.
 
    TO ADD A PHOTO
-   1. Drop the optimised files in assets/images/afro-wall/.
-      Naming convention (see tools/optimise-afro-photos.py):
-        <name>-400.webp / .jpg
-        <name>-800.webp / .jpg      (and any larger widths)
-        <name>-full.webp / .jpg     (shown in the lightbox)
-   2. Add one entry to afroWallImages:
+   1. Prepare the files:
+        python3 tools/optimise-afro-photos.py afro-10 photo.jpg
+      It writes assets/images/afro-wall/afro-10-*.webp/.jpg and
+      prints the entry below.
+   2. Add it to afroWallImages:
         {
-          name: 'afro-03',
+          name: 'afro-10',
           widths: [400, 800, 1200],   // widths that actually exist
           width: 960, height: 1280,   // intrinsic size, stops layout shift
           alt: 'Short, factual description of the photo.',
           focus: '50% 30%',           // optional: crop focus, defaults to 50% 32%
         }
-   The wall handles any number of photos — 2, 20 or 50+ — and
-   varies the tile shapes automatically.
+
+   TO ADD A VIDEO CLIP
+   1. Put an MP4 (faststart, h264/aac) in assets/video/afro-wall/,
+      and a poster frame in assets/images/afro-wall/ following the
+      same <name>-poster-400/-800.webp/.jpg naming as photos.
+   2. Add it with type: 'video':
+        {
+          type: 'video',
+          name: 'afro-10',
+          widths: [400, 800],         // poster widths that exist
+          width: 464, height: 832,
+          video: 'assets/video/afro-wall/afro-10',   // no extension — .mp4 and .webm are both served
+          alt: 'Short, factual description of the clip.',
+        }
+   The wall handles any number of items — 2, 20 or 50+ — and varies
+   the tile shapes automatically.
    ========================================================= */
 
 import { eventConfig } from './config.js';
 
-/** @typedef {{name:string,widths:number[],width:number,height:number,alt:string,focus?:string}} AfroWallImage */
+/** @typedef {{
+ *   type?: 'photo'|'video', name:string, widths:number[],
+ *   width:number, height:number, alt:string, focus?:string, video?:string,
+ * }} AfroWallItem */
 
-/** @type {AfroWallImage[]} */
+/** @type {AfroWallItem[]} */
 export const afroWallImages = [
   {
     name: 'afro-01',
@@ -101,6 +118,26 @@ export const afroWallImages = [
     alt: 'A warm, vintage-toned portrait of a young man with an Afro, wearing a white vest.',
     focus: '50% 32%',
   },
+  {
+    type: 'video',
+    name: 'afro-10',
+    widths: [400, 464],
+    width: 464,
+    height: 832,
+    video: 'assets/video/afro-wall/afro-10',
+    alt: 'A short clip showing off an Afro hairstyle.',
+    focus: '50% 30%',
+  },
+  {
+    type: 'video',
+    name: 'afro-11',
+    widths: [400, 464],
+    width: 464,
+    height: 832,
+    video: 'assets/video/afro-wall/afro-11',
+    alt: 'A short clip showing off an Afro hairstyle.',
+    focus: '50% 30%',
+  },
 ];
 
 /* Where "Join the wall" should send people. Set it in scripts/config.js
@@ -110,28 +147,38 @@ const afroWallSubmissionUrl = eventConfig.afroWallSubmissionUrl || '';
 
 const DIR = 'assets/images/afro-wall';
 const SIZES =
-  '(min-width: 1280px) 22vw, (min-width: 768px) 30vw, (min-width: 480px) 44vw, 45vw';
+  '(min-width: 1280px) 22vw, (min-width: 768px) 30vw, (min-width: 480px) 30vw, 42vw';
 
-const srcset = (img, ext) =>
-  img.widths.map((w) => `${DIR}/${img.name}-${w}.${ext} ${w}w`).join(', ');
+const isVideo = (item) => item.type === 'video';
 
-const fallbackSrc = (img) =>
-  `${DIR}/${img.name}-${img.widths[img.widths.length - 1]}.jpg`;
+/* Videos use the same "<name>-poster-<width>.<ext>" pattern as photos
+   use "<name>-<width>.<ext>", so both share one srcset builder. */
+const stem = (item) => (isVideo(item) ? `${item.name}-poster` : item.name);
 
-function tileMarkup(img, index, total) {
+const srcset = (item, ext) =>
+  item.widths.map((w) => `${DIR}/${stem(item)}-${w}.${ext} ${w}w`).join(', ');
+
+const fallbackSrc = (item, ext = 'jpg') =>
+  `${DIR}/${stem(item)}-${item.widths[item.widths.length - 1]}.${ext}`;
+
+function tileMarkup(item, index, total) {
   const eager = index < 4; // first screenful loads immediately
+  const label = isVideo(item)
+    ? `Play video ${index + 1} of ${total}: ${escapeAttr(item.alt)}`
+    : `View photo ${index + 1} of ${total}: ${escapeAttr(item.alt)}`;
   return `
-    <li class="afro-wall__item"${img.focus ? ` style="--focus:${escapeAttr(img.focus)}"` : ''}>
-      <button class="afro-wall__tile" type="button" data-afro-open="${index}"
-              aria-label="View photo ${index + 1} of ${total}: ${escapeAttr(img.alt)}">
+    <li class="afro-wall__item"${item.focus ? ` style="--focus:${escapeAttr(item.focus)}"` : ''}>
+      <button class="afro-wall__tile${isVideo(item) ? ' afro-wall__tile--video' : ''}" type="button"
+              data-afro-open="${index}" aria-label="${label}">
         <picture>
-          <source type="image/webp" srcset="${srcset(img, 'webp')}" sizes="${SIZES}">
-          <img src="${fallbackSrc(img)}" srcset="${srcset(img, 'jpg')}" sizes="${SIZES}"
-               width="${img.width}" height="${img.height}"
+          <source type="image/webp" srcset="${srcset(item, 'webp')}" sizes="${SIZES}">
+          <img src="${fallbackSrc(item)}" srcset="${srcset(item, 'jpg')}" sizes="${SIZES}"
+               width="${item.width}" height="${item.height}"
                loading="${eager ? 'eager' : 'lazy'}" decoding="async"
                ${eager ? 'fetchpriority="high"' : ''}
-               alt="${escapeAttr(img.alt)}">
+               alt="${escapeAttr(item.alt)}">
         </picture>
+        ${isVideo(item) ? '<span class="afro-wall__play" aria-hidden="true"></span>' : ''}
       </button>
     </li>`;
 }
@@ -175,14 +222,20 @@ export function initAfroWall() {
 }
 
 /* ---------------------------------------------------------
-   Lightbox — no dependencies, ~2kb of behaviour
+   Lightbox — no dependencies, ~2kb of behaviour. Shows a photo
+   or plays a video depending on the item that was opened.
    --------------------------------------------------------- */
 function initLightbox(section) {
   const lb = document.querySelector('[data-afro-lightbox]');
   if (!lb) return;
 
+  const stage = lb.querySelector('[data-afro-lb-stage]');
+  const pictureEl = lb.querySelector('[data-afro-lb-picture]');
   const imgEl = lb.querySelector('[data-afro-lb-img]');
   const srcEl = lb.querySelector('[data-afro-lb-source]');
+  const videoEl = lb.querySelector('[data-afro-lb-video]');
+  const videoMp4 = lb.querySelector('[data-afro-lb-video-mp4]');
+  const videoWebm = lb.querySelector('[data-afro-lb-video-webm]');
   const capEl = lb.querySelector('[data-afro-lb-caption]');
   const countEl = lb.querySelector('[data-afro-lb-count]');
   const closeBtn = lb.querySelector('[data-afro-close]');
@@ -198,15 +251,36 @@ function initLightbox(section) {
   prevBtn.hidden = !multiple;
   nextBtn.hidden = !multiple;
 
+  const stopVideo = () => {
+    videoEl.pause();
+    videoMp4.removeAttribute('src');
+    videoWebm.removeAttribute('src');
+    videoEl.load();
+  };
+
   const show = (i) => {
+    stopVideo();
     index = (i + total) % total;
-    const img = afroWallImages[index];
-    srcEl.srcset = `${DIR}/${img.name}-full.webp`;
-    imgEl.src = `${DIR}/${img.name}-full.jpg`;
-    imgEl.width = img.width;
-    imgEl.height = img.height;
-    imgEl.alt = img.alt;
-    capEl.textContent = img.alt;
+    const item = afroWallImages[index];
+
+    if (isVideo(item)) {
+      pictureEl.hidden = true;
+      videoEl.hidden = false;
+      videoEl.poster = fallbackSrc(item);
+      videoMp4.src = `${item.video}.mp4`;
+      videoWebm.src = `${item.video}.webm`;
+      videoEl.load();
+      videoEl.play().catch(() => { /* autoplay may be blocked; controls remain available */ });
+    } else {
+      videoEl.hidden = true;
+      pictureEl.hidden = false;
+      srcEl.srcset = `${DIR}/${item.name}-full.webp`;
+      imgEl.src = `${DIR}/${item.name}-full.jpg`;
+      imgEl.width = item.width;
+      imgEl.height = item.height;
+      imgEl.alt = item.alt;
+    }
+    capEl.textContent = item.alt;
     countEl.textContent = `${index + 1} / ${total}`;
   };
 
@@ -232,6 +306,7 @@ function initLightbox(section) {
   };
 
   const close = () => {
+    stopVideo();
     lb.classList.remove('is-open');
     unlockScroll();
     const hide = () => { lb.hidden = true; };
@@ -263,7 +338,7 @@ function initLightbox(section) {
 
   function trapFocus(e) {
     const focusables = Array.from(
-      lb.querySelectorAll('button:not([hidden]):not([disabled])')
+      lb.querySelectorAll('button:not([hidden]):not([disabled]), video:not([hidden])')
     );
     if (!focusables.length) return;
     const first = focusables[0];
@@ -272,10 +347,14 @@ function initLightbox(section) {
     else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
   }
 
-  // Swipe between photos on touch devices
+  // Swipe between items on touch devices (ignored while a video has focus
+  // so a horizontal seek-drag on the scrubber isn't mistaken for a swipe).
   let startX = null;
-  lb.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; }, { passive: true });
-  lb.addEventListener('touchend', (e) => {
+  stage.addEventListener('touchstart', (e) => {
+    if (e.target === videoEl) return;
+    startX = e.touches[0].clientX;
+  }, { passive: true });
+  stage.addEventListener('touchend', (e) => {
     if (startX === null || !multiple) return;
     const dx = e.changedTouches[0].clientX - startX;
     if (Math.abs(dx) > 50) show(dx < 0 ? index + 1 : index - 1);

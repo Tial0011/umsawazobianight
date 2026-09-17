@@ -55,7 +55,7 @@ export const eventConfig = {
 
   // The live domain. Used for sharing, so shared links always point at
   // the real site rather than whatever URL the visitor happens to be on.
-  siteUrl: 'https://umsawazobianight.netlify.app/',
+  siteUrl: 'https://umsawazobianight.top/',
 
   // Only a link that is filled in here will ever be shown or
   // linked to from the site.

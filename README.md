@@ -138,10 +138,10 @@ array (2, 20 or 50+).
 1. Optimise the originals:
 
    ```bash
-   python3 tools/optimise-afro-photos.py afro-03 ~/Downloads/whatsapp-photo.jpg
+   python3 tools/optimise-afro-photos.py afro-12 ~/Downloads/whatsapp-photo.jpg
    ```
 
-   That writes `afro-03-400/-800/-1200.webp` + `.jpg` and `afro-03-full.webp`
+   That writes `afro-12-400/-800/-1200.webp` + `.jpg` and `afro-12-full.webp`
    + `.jpg` into `assets/images/afro-wall/`, and prints the array entry to
    paste. Photos are only resized and re-encoded — no filters, retouching or
    any other alteration of the people in them.
@@ -150,7 +150,7 @@ array (2, 20 or 50+).
 
    ```js
    {
-     name: 'afro-03',
+     name: 'afro-12',
      widths: [400, 800, 1200],
      width: 1080, height: 1440,   // intrinsic size — prevents layout shift
      alt: 'Short, factual description of the photo.',
@@ -161,10 +161,52 @@ array (2, 20 or 50+).
    Write the `alt` text by hand: it is what screen-reader users and anyone on
    a failed image load get.
 
+### Adding video clips
+
+The wall also takes short video clips (that's how the two current ones —
+`afro-10`, `afro-11` — got in). A tile shows the poster frame with a small
+play badge; tapping it opens the lightbox and plays the clip with controls.
+
+1. Remux the clip so it streams instead of downloading fully before playing,
+   make a WebM copy for browsers that don't decode this file's H.264 profile,
+   and pull a poster frame from it:
+
+   ```bash
+   ffmpeg -i clip.mp4 -c copy -movflags +faststart assets/video/afro-wall/afro-12.mp4
+   ffmpeg -i clip.mp4 -c:v libvpx-vp9 -crf 34 -b:v 0 -c:a libopus -b:a 96k \
+     assets/video/afro-wall/afro-12.webm
+   ffmpeg -ss 00:00:01 -i clip.mp4 -frames:v 1 -q:v 3 poster.jpg
+   python3 tools/optimise-afro-photos.py afro-12-poster poster.jpg
+   ```
+
+   (The `optimise-afro-photos.py` step is the same one photos use — it just
+   happens to be run on a still frame here, producing
+   `afro-12-poster-400/-800.webp/.jpg`.)
+
+2. Add it to `afroWallImages` with `type: 'video'`. Give `video` the shared
+   path with no extension — the lightbox tries the `.mp4` first, falling
+   back to `.webm`:
+
+   ```js
+   {
+     type: 'video',
+     name: 'afro-12',
+     widths: [400, 800],           // the poster widths that exist
+     width: 1080, height: 1920,    // the video's intrinsic size
+     video: 'assets/video/afro-wall/afro-12',
+     alt: 'Short, factual description of the clip.',
+   }
+   ```
+
+   Keep clips short and the file size modest — they sit in a masonry wall
+   next to photos, not a dedicated video page. No filters or edits to the
+   original footage.
+
 ### How the layout stays varied
 
-Tiles flow in a CSS column masonry (2 columns on mobile, 3 from 768px,
-4 from 1280px). Tile proportions cycle every 7 items and tilts every 5, two
+Tiles flow in a CSS column masonry — 3 columns from the smallest phone
+(kept deliberately compact so the wall doesn't dominate the screen), 4 from
+768px, 5 from 1280px. Tile proportions cycle every 7 items and tilts every 5, two
 lengths that rarely line up with the number of tiles per column, so the wall
 keeps staggering instead of settling into a rigid grid at any photo count.
 Every ratio is portrait or square, because submissions are phone selfies and a
@@ -208,7 +250,7 @@ when any of the following arrive:
 - **`eventConfig.confirmation.instructions`** — the copy shown for step 04,
   "Confirm your ticket". Currently points people at the contacts above.
 - **`eventConfig.siteUrl`** — the canonical domain used by Section 12's
-  share links, set to <https://umsawazobianight.netlify.app/>. Left empty, it
+  share links, set to <https://umsawazobianight.top/>. Left empty, it
   falls back to the visitor's current browser URL.
 - **`eventConfig.socials.*`** — the footer only ever renders a social link
   that has a real URL here; empty values stay hidden completely (icon and

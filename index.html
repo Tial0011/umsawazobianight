@@ -7,21 +7,21 @@
 <meta name="description" content="Experience Wazobia Night 2026, hosted by the University of Medical Students' Association (UMSA), University of Medical Sciences, Ondo. Celebrate Nigeria's rich cultural diversity on October 1, 2026.">
 <meta name="theme-color" content="#11100E">
 <!-- PLACEHOLDER: replace with the live domain before launch -->
-<link rel="canonical" href="https://umsawazobianight.netlify.app/">
+<link rel="canonical" href="https://umsawazobianight.top/">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="UMSA – UNIMED">
 <meta property="og:title" content="Wazobia Night 2026 | UMSA – UNIMED">
 <meta property="og:description" content="One night, many cultures. Wazobia Night 2026 at NIEPA Field, UNIMED Ondo — 1 October 2026, 4:00 PM.">
-<meta property="og:url" content="https://umsawazobianight.netlify.app/">
-<meta property="og:image" content="https://umsawazobianight.netlify.app/assets/images/og-wazobia-night-2026.jpg">
+<meta property="og:url" content="https://umsawazobianight.top/">
+<meta property="og:image" content="https://umsawazobianight.top/assets/images/og-wazobia-night-2026.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Wazobia Night 2026 event artwork">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Wazobia Night 2026 | UMSA – UNIMED">
 <meta name="twitter:description" content="One night, many cultures. 1 October 2026, 4:00 PM, NIEPA Field, UNIMED Ondo.">
-<meta name="twitter:image" content="https://umsawazobianight.netlify.app/assets/images/og-wazobia-night-2026.jpg">
+<meta name="twitter:image" content="https://umsawazobianight.top/assets/images/og-wazobia-night-2026.jpg">
 
 <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="favicon.ico" sizes="32x32">
@@ -77,7 +77,7 @@
     "name": "University of Medical Students' Association (UMSA), University of Medical Sciences, Ondo"
   },
   "description": "A cultural night celebrating Nigeria's languages, dress, music and traditions.",
-  "image": "https://umsawazobianight.netlify.app/assets/images/og-wazobia-night-2026.jpg",
+  "image": "https://umsawazobianight.top/assets/images/og-wazobia-night-2026.jpg",
   "offers": [
     { "@type": "Offer", "name": "UMSAites", "price": "2000", "priceCurrency": "NGN", "availability": "https://schema.org/InStock" },
     { "@type": "Offer", "name": "Non-UMSAites", "price": "3500", "priceCurrency": "NGN", "availability": "https://schema.org/InStock" }
@@ -396,9 +396,9 @@
   </section>
 
   <!-- Afro Wall lightbox (populated by scripts/afro-wall.js) -->
-  <div class="afro-lb on-dark" role="dialog" aria-modal="true" aria-label="Afro Wall photo viewer"
+  <div class="afro-lb on-dark" role="dialog" aria-modal="true" aria-label="Afro Wall viewer"
        hidden data-afro-lightbox>
-    <button class="afro-lb__backdrop" type="button" aria-label="Close photo viewer"
+    <button class="afro-lb__backdrop" type="button" aria-label="Close viewer"
             data-afro-backdrop tabindex="-1"></button>
 
     <div class="afro-lb__bar">
@@ -406,11 +406,15 @@
       <button class="afro-lb__btn" type="button" data-afro-close>Close</button>
     </div>
 
-    <div class="afro-lb__stage">
-      <picture>
+    <div class="afro-lb__stage" data-afro-lb-stage>
+      <picture data-afro-lb-picture>
         <source type="image/webp" data-afro-lb-source>
         <img class="afro-lb__img" alt="" decoding="async" data-afro-lb-img>
       </picture>
+      <video class="afro-lb__video" playsinline controls hidden data-afro-lb-video>
+        <source type="video/mp4" data-afro-lb-video-mp4>
+        <source type="video/webm" data-afro-lb-video-webm>
+      </video>
     </div>
 
     <div class="afro-lb__foot">
