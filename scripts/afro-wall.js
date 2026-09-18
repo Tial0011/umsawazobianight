@@ -9,12 +9,12 @@
 
    TO ADD A PHOTO
    1. Prepare the files:
-        python3 tools/optimise-afro-photos.py afro-10 photo.jpg
-      It writes assets/images/afro-wall/afro-10-*.webp/.jpg and
+        python3 tools/optimise-afro-photos.py afro-14 photo.jpg
+      It writes assets/images/afro-wall/afro-14-*.webp/.jpg and
       prints the entry below.
    2. Add it to afroWallImages:
         {
-          name: 'afro-10',
+          name: 'afro-14',
           widths: [400, 800, 1200],   // widths that actually exist
           width: 960, height: 1280,   // intrinsic size, stops layout shift
           alt: 'Short, factual description of the photo.',
@@ -28,10 +28,10 @@
    2. Add it with type: 'video':
         {
           type: 'video',
-          name: 'afro-10',
+          name: 'afro-14',
           widths: [400, 800],         // poster widths that exist
           width: 464, height: 832,
-          video: 'assets/video/afro-wall/afro-10',   // no extension — .mp4 and .webm are both served
+          video: 'assets/video/afro-wall/afro-14',   // no extension — .mp4 and .webm are both served
           alt: 'Short, factual description of the clip.',
         }
    The wall handles any number of items — 2, 20 or 50+ — and varies
@@ -87,14 +87,6 @@ export const afroWallImages = [
     focus: '50% 42%',
   },
   {
-    name: 'afro-07',
-    widths: [400, 608],
-    width: 608,
-    height: 1080,
-    alt: 'A collage of Afro selfies alongside the UMSA Afro Hair celebration poster.',
-    focus: '50% 40%',
-  },
-  {
     name: 'afro-08',
     widths: [400, 720],
     width: 720,
@@ -110,12 +102,31 @@ export const afroWallImages = [
     alt: 'A warm, vintage-toned portrait of a young man with an Afro, wearing a white vest.',
     focus: '50% 32%',
   },
+  {
+    name: 'afro-12',
+    widths: [400, 637],
+    width: 637,
+    height: 772,
+    alt: 'A black-and-white profile portrait of a young man with a full Afro and a beard, wearing a checked shirt.',
+    focus: '50% 38%',
+  },
+  {
+    name: 'afro-13',
+    widths: [400, 560],
+    width: 560,
+    height: 535,
+    alt: 'A smiling young woman with a wide, voluminous Afro, wearing a yellow striped top.',
+    focus: '50% 42%',
+  },
 ];
 
-/* Removed: afro-06 (the four-photo-grid tile) and the two video clips
-   (afro-10, afro-11) — everything else from the original wall is back.
-   Add new entries here in the same shape (see TO ADD A PHOTO / TO ADD A
-   VIDEO CLIP above) whenever you want to grow the wall again. */
+/* The wall is all photos — no video clips are in it at the moment. Out of the
+   wall: afro-06 (the four-photo-grid tile) and afro-07 (the collage with the
+   poster lettering). Add new entries here in the same shape (see TO ADD A
+   PHOTO / TO ADD A VIDEO CLIP above) whenever you want to grow it again.
+
+   Note: `alt` is never shown on the page — the wall and the lightbox are
+   picture-only. It stays for screen readers and for image search. */
 
 /* Where "Join the wall" should send people. Set it in scripts/config.js
    (eventConfig.afroWallSubmissionUrl). While it is empty the CTA stays
@@ -213,7 +224,6 @@ function initLightbox(section) {
   const videoEl = lb.querySelector('[data-afro-lb-video]');
   const videoMp4 = lb.querySelector('[data-afro-lb-video-mp4]');
   const videoWebm = lb.querySelector('[data-afro-lb-video-webm]');
-  const capEl = lb.querySelector('[data-afro-lb-caption]');
   const countEl = lb.querySelector('[data-afro-lb-count]');
   const closeBtn = lb.querySelector('[data-afro-close]');
   const prevBtn = lb.querySelector('[data-afro-prev]');
@@ -257,7 +267,8 @@ function initLightbox(section) {
       imgEl.height = item.height;
       imgEl.alt = item.alt;
     }
-    capEl.textContent = item.alt;
+    // No caption is shown — the lightbox is picture-only. The alt text above
+    // still describes the item for screen readers.
     countEl.textContent = `${index + 1} / ${total}`;
   };
 

@@ -40,6 +40,15 @@
   font-size: var(--step--1);
   color: rgba(248, 232, 203, 0.7);
 }
+/* Short plain-language line about the event — helps people (and search
+   engines) confirm they have landed on the right page. */
+.footer__about {
+  margin-top: 10px;
+  max-width: 44ch;
+  font-size: var(--step--1);
+  line-height: 1.5;
+  color: rgba(248, 232, 203, 0.6);
+}
 
 .footer__heading {
   font-size: var(--step--1);

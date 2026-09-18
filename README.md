@@ -138,10 +138,10 @@ array (2, 20 or 50+).
 1. Optimise the originals:
 
    ```bash
-   python3 tools/optimise-afro-photos.py afro-12 ~/Downloads/whatsapp-photo.jpg
+   python3 tools/optimise-afro-photos.py afro-14 ~/Downloads/whatsapp-photo.jpg
    ```
 
-   That writes `afro-12-400/-800/-1200.webp` + `.jpg` and `afro-12-full.webp`
+   That writes `afro-14-400/-800/-1200.webp` + `.jpg` and `afro-14-full.webp`
    + `.jpg` into `assets/images/afro-wall/`, and prints the array entry to
    paste. Photos are only resized and re-encoded — no filters, retouching or
    any other alteration of the people in them.
@@ -150,7 +150,7 @@ array (2, 20 or 50+).
 
    ```js
    {
-     name: 'afro-12',
+     name: 'afro-14',
      widths: [400, 800, 1200],
      width: 1080, height: 1440,   // intrinsic size — prevents layout shift
      alt: 'Short, factual description of the photo.',
@@ -159,29 +159,31 @@ array (2, 20 or 50+).
    ```
 
    Write the `alt` text by hand: it is what screen-reader users and anyone on
-   a failed image load get.
+   a failed image load get. It is never shown as a visible caption.
 
 ### Adding video clips
 
-The wall also takes short video clips (that's how the two current ones —
-`afro-10`, `afro-11` — got in). A tile shows the poster frame with a small
-play badge; tapping it opens the lightbox and plays the clip with controls.
+The wall is all photos right now, but it also takes short video clips if you
+want them — the code path is still there. A video tile shows the poster frame
+with a small play badge; tapping it opens the lightbox and plays the clip
+with controls. (Use `afro-14` or higher for new items: `afro-12` and
+`afro-13` are taken, and `afro-06` / `afro-07` were removed.)
 
 1. Remux the clip so it streams instead of downloading fully before playing,
    make a WebM copy for browsers that don't decode this file's H.264 profile,
    and pull a poster frame from it:
 
    ```bash
-   ffmpeg -i clip.mp4 -c copy -movflags +faststart assets/video/afro-wall/afro-12.mp4
+   ffmpeg -i clip.mp4 -c copy -movflags +faststart assets/video/afro-wall/afro-14.mp4
    ffmpeg -i clip.mp4 -c:v libvpx-vp9 -crf 34 -b:v 0 -c:a libopus -b:a 96k \
-     assets/video/afro-wall/afro-12.webm
+     assets/video/afro-wall/afro-14.webm
    ffmpeg -ss 00:00:01 -i clip.mp4 -frames:v 1 -q:v 3 poster.jpg
-   python3 tools/optimise-afro-photos.py afro-12-poster poster.jpg
+   python3 tools/optimise-afro-photos.py afro-14-poster poster.jpg
    ```
 
    (The `optimise-afro-photos.py` step is the same one photos use — it just
    happens to be run on a still frame here, producing
-   `afro-12-poster-400/-800.webp/.jpg`.)
+   `afro-14-poster-400/-800.webp/.jpg`.)
 
 2. Add it to `afroWallImages` with `type: 'video'`. Give `video` the shared
    path with no extension — the lightbox tries the `.mp4` first, falling
@@ -190,10 +192,10 @@ play badge; tapping it opens the lightbox and plays the clip with controls.
    ```js
    {
      type: 'video',
-     name: 'afro-12',
+     name: 'afro-14',
      widths: [400, 800],           // the poster widths that exist
      width: 1080, height: 1920,    // the video's intrinsic size
-     video: 'assets/video/afro-wall/afro-12',
+     video: 'assets/video/afro-wall/afro-14',
      alt: 'Short, factual description of the clip.',
    }
    ```
@@ -222,6 +224,11 @@ Plain JS, no library: click or tap a photo to open it, `Escape` or the Close
 button to leave, arrow keys or the on-screen arrows (or a swipe) to move
 between photos. Focus is trapped while open, returns to the tile that opened
 it on close, and background scrolling is locked.
+
+The viewer is deliberately picture-only: no caption is printed under the
+image, just the position counter (`3 / 9`) and the arrows. The `alt` text in
+`afroWallImages` is still required — it is what screen readers announce and
+what image search indexes — it simply is not displayed.
 
 ### "Join the wall" CTA
 
@@ -330,6 +337,42 @@ icons in `site.webmanifest`.
 - Fill in `scripts/config.js` (`eventConfig.payment`, `.confirmation`,
   `.siteUrl`, `.socials`) as each of those becomes available — see
   "Sections 11–14" below for what each field controls.
+
+## SEO
+
+The page is tuned for the names people actually type: **UMSA**, **UMSA
+Wazobia Night**, **UNIMED Wazobia Night**, **UNIMED Wazobia** and **Wazobia
+Night 2026**.
+
+Where those names live:
+
+- `<title>` and `<meta name="description">` — both lead with "UMSA Wazobia
+  Night 2026" and carry "UNIMED Wazobia Night".
+- `<meta name="keywords">`, `robots` (with `max-image-preview:large`),
+  `author`, and the `geo.region` / `geo.placename` pair for Ondo.
+- Open Graph and Twitter cards — title, description, image alt, `og:locale`,
+  `og:site_name`.
+- JSON-LD, now a `@graph` of four linked nodes: `Organization` (UMSA, with
+  `alternateName` covering the short forms and `parentOrganization` UNIMED),
+  `WebSite`, `WebPage` and `Event`. The `Event` carries `alternateName` for
+  each search variant, full venue address, both ticket offers with URLs, and
+  start/end times.
+- On the page itself: the `<h1>` keeps its display lettering and adds a
+  visually-hidden "2026 — UMSA Wazobia Night at UNIMED…"; the hero lede names
+  the event in full; the footer carries a short plain-language line saying
+  what the site is.
+- `sitemap.xml` (now with image entries), `site.webmanifest` and
+  `package.json` all use the full name.
+
+Nothing here is hidden keyword stuffing — the visually-hidden text is the
+real name of the event, readable by screen readers, and the visible copy says
+the same thing. Two things still need doing before this ranks:
+
+1. Swap `https://umsawazobianight.top/` for the live domain everywhere if it
+   changes (canonical, OG, Twitter, JSON-LD, `robots.txt`, `sitemap.xml`).
+2. Submit the domain to Google Search Console and request indexing. A brand
+   new domain will not appear in results until it has been crawled, however
+   good the markup is.
 
 ## Accessibility and performance notes
 

@@ -203,7 +203,8 @@
   z-index: 1;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  /* Picture-only viewer: no caption here, so the nav sits on the right. */
+  justify-content: flex-end;
   gap: 12px;
   padding: 12px var(--gutter);
   color: var(--text-dark-bg);
@@ -235,12 +236,6 @@
 }
 .afro-lb__video[hidden],
 .afro-lb__stage picture[hidden] { display: none; }
-
-.afro-lb__caption {
-  max-width: 52ch;
-  font-size: var(--step--1);
-  color: rgba(248, 232, 203, 0.78);
-}
 
 .afro-lb__btn {
   display: inline-flex;

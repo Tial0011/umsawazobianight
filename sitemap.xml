@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://umsawazobianight.top/</loc>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://umsawazobianight.top/assets/images/og-wazobia-night-2026.jpg</image:loc>
+      <image:title>UMSA Wazobia Night 2026</image:title>
+      <image:caption>UMSA Wazobia Night 2026 — UNIMED Wazobia Night, NIEPA Field, Ondo, 1 October 2026.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://umsawazobianight.top/assets/images/flyer-full.jpg</image:loc>
+      <image:title>UMSA Wazobia Night 2026 flyer</image:title>
+      <image:caption>Official flyer for UMSA Wazobia Night 2026 at the University of Medical Sciences, Ondo.</image:caption>
+    </image:image>
   </url>
 </urlset>

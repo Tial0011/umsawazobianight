@@ -2,12 +2,21 @@
   "name": "wazobia-night-2026",
   "version": "0.1.0",
   "private": true,
-  "description": "Official event site for Wazobia Night 2026 — UMSA, University of Medical Sciences, Ondo.",
+  "description": "Official event site for UMSA Wazobia Night 2026 \u2014 UNIMED Wazobia Night, University of Medical Sciences, Ondo.",
   "scripts": {
     "start": "npx --yes serve . -l 3000",
     "dev": "npx --yes serve . -l 3000",
     "bundle": "python3 tools/build-single.py"
   },
-  "keywords": ["wazobia night", "umsa", "unimed", "ondo", "cultural night"],
+  "keywords": [
+    "umsa",
+    "umsa wazobia night",
+    "unimed wazobia night",
+    "unimed wazobia",
+    "wazobia night 2026",
+    "unimed",
+    "ondo",
+    "cultural night"
+  ],
   "license": "UNLICENSED"
 }
