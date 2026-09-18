@@ -18,6 +18,7 @@
   line-height: 0.88;
   color: var(--cream);
 }
+.beyond__title span { display: block; margin-top: 0.2em; }
 .beyond__title::after {
   content: "";
   display: block;

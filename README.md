@@ -13,9 +13,10 @@ Official event site. Built so far:
 9. The night / programme — event timeline, data-driven
 10. Live countdown — real-time countdown to doors-open, WAT-correct
 11. Get your ticket — pricing, how-to-pay steps, payment panel (config-driven)
-12. Share the night — WhatsApp/X/Instagram/copy-link, native share on mobile
-13. Wazobia awaits — final CTA
-14. Footer — event details, quick links, socials (config-driven)
+12. FAQ — accordion, placeholder questions/answers ready to be swapped in
+13. Share the night — WhatsApp/X/Instagram/copy-link, native share on mobile
+14. Wazobia awaits — final CTA
+15. Footer — event details, quick links, socials (config-driven)
 
 ## Running it
 
@@ -52,7 +53,8 @@ styles/
   components/
     navbar.css  hero.css  wazobia-intro.css  culture-cards.css
     beyond.css  cultural-experience.css  culture-call.css  waiting.css
-    programme.css  countdown.css  button.css  pattern.css  footer.css
+    programme.css  countdown.css  tickets.css  faq.css  share.css
+    final-cta.css  button.css  pattern.css  footer.css
 scripts/
   main.js                   boots the modules
   nav.js                    sticky navbar + mobile menu (focus, Escape, scroll lock)
@@ -236,14 +238,25 @@ Hidden until `eventConfig.afroWallSubmissionUrl` in `scripts/config.js` is
 set. Put the real WhatsApp link, form URL or `mailto:` address there and the
 CTA appears and points at it. No placeholder destination is invented.
 
-## Sections 11–14 — event config, payment, sharing, footer
+## Section 12 — FAQ
+
+Plain `<details>`/`<summary>` accordion, no JavaScript required — each
+`.faq__item` opens and closes natively, so it also works with JS disabled.
+The five questions currently in `index.html` are placeholders (`Placeholder
+question 1`, etc.) with an example of the kind of question they might hold;
+edit the text of each `<summary class="faq__question">` and the paragraph
+inside the matching `.faq__answer` directly in `index.html` — add or remove
+`<details class="faq__item">` blocks the same way. Styling lives in
+`styles/components/faq.css`.
+
+## Sections 11, 13–15 — event config, payment, sharing, footer
 
 All editable facts for these four sections live in one place:
 `scripts/config.js`, exported as `eventConfig`. Nothing else needs to change
 when any of the following arrive:
 
 - **`eventConfig.payment.paymentLink`** — once set, every "Get your ticket"
-  button on the site (navbar, hero, Section 11, Section 13) automatically
+  button on the site (navbar, hero, Section 11, Section 14) automatically
   points at it and opens in a new tab. Until then they all point at safe,
   real in-page anchors (`#tickets`, `#payment-instructions`) — never a bare
   `#` and never a fake checkout.
@@ -256,14 +269,14 @@ when any of the following arrive:
   re-renders the whole list from this array.
 - **`eventConfig.confirmation.instructions`** — the copy shown for step 04,
   "Confirm your ticket". Currently points people at the contacts above.
-- **`eventConfig.siteUrl`** — the canonical domain used by Section 12's
+- **`eventConfig.siteUrl`** — the canonical domain used by Section 13's
   share links, set to <https://umsawazobianight.top/>. Left empty, it
   falls back to the visitor's current browser URL.
 - **`eventConfig.socials.*`** — the footer only ever renders a social link
   that has a real URL here; empty values stay hidden completely (icon and
   list item), never a placeholder link to a fake profile.
 
-### Section 12 — why Instagram behaves differently
+### Section 13 — why Instagram behaves differently
 
 Instagram has no web endpoint that accepts a shared link: nothing can pre-fill
 a post or story from a URL the way WhatsApp and X do. The Instagram button
@@ -273,8 +286,8 @@ native Share button above it hands off to the Instagram app directly, which is
 the smoother route where it exists.
 
 Relevant files: `scripts/config.js` (data), `scripts/tickets.js` (Section 11
-logic), `scripts/share.js` (Section 12 logic), `scripts/footer.js` (Section 14
-logic), `styles/components/tickets.css`, `share.css`, `final-cta.css`.
+logic), `scripts/share.js` (Section 13 logic), `scripts/footer.js` (Section 15
+logic), `styles/components/tickets.css`, `faq.css`, `share.css`, `final-cta.css`.
 
 The footer also carries three brand marks —
 `assets/images/logo-umsa.png`, `logo-unimed.png` and `logo-tla.png` — cropped
@@ -321,9 +334,12 @@ mobile data.
 When you swap in real photos, delete the `.culture-card__media::after` rule in
 `styles/components/culture-cards.css` — it draws the "Photo placeholder" tag.
 
-Favicon: add `favicon.ico` (32×32) and `assets/images/apple-touch-icon.png`
-(180×180) to match the `<link>` tags already in `index.html`, and list the PNG
-icons in `site.webmanifest`.
+Favicon: `favicon.ico` (16/32/48/64/256px, multi-size), `apple-touch-icon.png`
+(180×180), `icon-192.png` and `icon-512.png` are already generated and wired
+up to the `<link>` tags in `index.html` and `site.webmanifest` — they're just
+rendered from the placeholder mark above, not an official logo. Once the real
+UMSA/Wazobia mark is ready, re-export the same set of files (same names, same
+sizes) from that artwork; nothing else needs to change.
 
 ## Before launch
 
@@ -336,7 +352,9 @@ icons in `site.webmanifest`.
   not supplied.
 - Fill in `scripts/config.js` (`eventConfig.payment`, `.confirmation`,
   `.siteUrl`, `.socials`) as each of those becomes available — see
-  "Sections 11–14" below for what each field controls.
+  "Sections 11, 13–15" above for what each field controls.
+- Replace the five placeholder questions/answers in the FAQ section
+  (Section 12) with the real ones.
 
 ## SEO
 
@@ -352,16 +370,23 @@ Where those names live:
   `author`, and the `geo.region` / `geo.placename` pair for Ondo.
 - Open Graph and Twitter cards — title, description, image alt, `og:locale`,
   `og:site_name`.
-- JSON-LD, now a `@graph` of four linked nodes: `Organization` (UMSA, with
+- JSON-LD, now a `@graph` of five linked nodes: `Organization` (UMSA, with
   `alternateName` covering the short forms and `parentOrganization` UNIMED),
-  `WebSite`, `WebPage` and `Event`. The `Event` carries `alternateName` for
-  each search variant, full venue address, both ticket offers with URLs, and
-  start/end times.
+  `WebSite`, `WebPage`, `Event` and `VideoObject`. The `Event` carries
+  `alternateName` for each search variant, full venue address, both ticket
+  offers with URLs, and start/end times.
+- The Section 5 video is marked up as a `VideoObject` (name, description,
+  `thumbnailUrl`, `uploadDate`, `duration`, `contentUrl`), linked from the
+  `WebPage` node, and also listed in `sitemap.xml` via a `<video:video>`
+  entry. Without both of these a `<video>` tag is just a page element to
+  Google — this is what makes it eligible to be crawled and indexed as a
+  video result in its own right. If the video file is ever replaced, update
+  `uploadDate` and `duration` in both places to match the new file.
 - On the page itself: the `<h1>` keeps its display lettering and adds a
   visually-hidden "2026 — UMSA Wazobia Night at UNIMED…"; the hero lede names
   the event in full; the footer carries a short plain-language line saying
   what the site is.
-- `sitemap.xml` (now with image entries), `site.webmanifest` and
+- `sitemap.xml` (now with image and video entries), `site.webmanifest` and
   `package.json` all use the full name.
 
 Nothing here is hidden keyword stuffing — the visually-hidden text is the
@@ -370,9 +395,11 @@ the same thing. Two things still need doing before this ranks:
 
 1. Swap `https://umsawazobianight.top/` for the live domain everywhere if it
    changes (canonical, OG, Twitter, JSON-LD, `robots.txt`, `sitemap.xml`).
-2. Submit the domain to Google Search Console and request indexing. A brand
-   new domain will not appear in results until it has been crawled, however
-   good the markup is.
+2. ~~Submit the domain to Google Search Console and request indexing.~~ Done
+   — the domain is already added to Search Console. If the domain ever
+   changes, add the new one and resubmit `sitemap.xml`; a brand new domain
+   will not appear in results until it has been crawled, however good the
+   markup is.
 
 ## Accessibility and performance notes
 

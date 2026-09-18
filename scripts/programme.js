@@ -5,30 +5,28 @@
 export const programme = [
   {
     time: '04:00 PM',
-    title: 'Doors Open',
-    description: 'Arrive in your cultural attire and find your spot at NIEPA Field.',
+    title: 'Doors Open · Red Carpet',
+    description: 'Arrive in your cultural attire, step out on the red carpet and find your spot at NIEPA Field.',
   },
   {
-    time: '06:00 PM',
+    time: '05:00 PM',
     title: 'Programme Begins',
     description: 'The main programme for the night gets underway.',
   },
   {
     time: '',
-    title: 'Coming Soon',
-    description: 'Full programme details to be announced.',
-    placeholder: true,
+    title: 'Eat · Drink · Dance',
+    description: 'Small chops, drinks and the dance floor open up.',
   },
   {
     time: '',
-    title: 'Coming Soon',
-    description: 'Full programme details to be announced.',
-    placeholder: true,
+    title: 'Celebrate · Connect · Experience',
+    description: 'Performances, culture showcases and moments to connect with people from every tribe in the room.',
   },
   {
     time: 'Late',
     title: 'Wazobia Night',
-    description: 'The celebration carries on into the evening.',
+    description: 'The celebration carries on into the night.',
   },
 ];
 

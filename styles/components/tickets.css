@@ -193,11 +193,6 @@
   gap: 14px;
   justify-items: start;
 }
-.tickets__cta-note {
-  font-size: var(--step--1);
-  color: rgba(23, 19, 15, 0.65);
-  max-width: 42ch;
-}
 
 @media (max-width: 639px) {
   .tickets__cta .btn { width: 100%; }

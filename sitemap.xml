@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
   <url>
     <loc>https://umsawazobianight.top/</loc>
     <lastmod>2026-09-18</lastmod>
@@ -16,5 +17,14 @@
       <image:title>UMSA Wazobia Night 2026 flyer</image:title>
       <image:caption>Official flyer for UMSA Wazobia Night 2026 at the University of Medical Sciences, Ondo.</image:caption>
     </image:image>
+    <video:video>
+      <video:thumbnail_loc>https://umsawazobianight.top/assets/video/cultural-experience-poster.jpg</video:thumbnail_loc>
+      <video:title>The Cultural Experience — UMSA Wazobia Night 2026</video:title>
+      <video:description>A preview of UMSA Wazobia Night 2026 — Nigerian music, dance, dress and food at NIEPA Field, University of Medical Sciences, Ondo.</video:description>
+      <video:content_loc>https://umsawazobianight.top/assets/video/cultural-experience.mp4</video:content_loc>
+      <video:duration>21</video:duration>
+      <video:publication_date>2026-09-17</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
   </url>
 </urlset>

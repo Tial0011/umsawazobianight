@@ -10,7 +10,7 @@
 export const eventConfig = {
   name: 'Wazobia Night 2026',
   organizer: 'UMSA',
-  organizerFull: "University of Medical Students' Association",
+  organizerFull: "Medical Students' Association, University of Medical Sciences, Ondo",
   university: 'UNIMED',
   universityFull: 'University of Medical Sciences, Ondo',
 

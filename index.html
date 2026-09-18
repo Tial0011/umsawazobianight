@@ -7,7 +7,7 @@
 <meta name="description" content="UMSA Wazobia Night 2026 — the UNIMED Wazobia cultural night at NIEPA Field, University of Medical Sciences, Ondo. 1 October 2026, 4:00 PM. Get your ticket.">
 <meta name="keywords" content="UMSA, UMSA Wazobia Night, UNIMED Wazobia Night, UNIMED Wazobia, Wazobia Night 2026, UMSA UNIMED, UMSA Ondo, Wazobia Night UNIMED Ondo, University of Medical Sciences Ondo cultural night">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-<meta name="author" content="UMSA — University of Medical Students' Association, UNIMED Ondo">
+<meta name="author" content="UMSA — Medical Students' Association, University of Medical Sciences, Ondo">
 <meta name="theme-color" content="#11100E">
 <!-- PLACEHOLDER: replace with the live domain before launch -->
 <link rel="canonical" href="https://umsawazobianight.top/">
@@ -33,8 +33,9 @@
 <meta name="twitter:image" content="https://umsawazobianight.top/assets/images/og-wazobia-night-2026.jpg">
 <meta name="twitter:image:alt" content="UMSA Wazobia Night 2026 event artwork — UNIMED Ondo, 1 October 2026">
 
+<link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
-<link rel="icon" href="favicon.ico" sizes="32x32">
+<link rel="icon" href="assets/images/icon-192.png" type="image/png" sizes="192x192">
 <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png" sizes="180x180">
 <link rel="manifest" href="site.webmanifest">
 
@@ -60,6 +61,7 @@
 <link rel="stylesheet" href="styles/components/programme.css">
 <link rel="stylesheet" href="styles/components/countdown.css">
 <link rel="stylesheet" href="styles/components/tickets.css">
+<link rel="stylesheet" href="styles/components/faq.css">
 <link rel="stylesheet" href="styles/components/share.css">
 <link rel="stylesheet" href="styles/components/final-cta.css">
 <link rel="stylesheet" href="styles/components/footer.css">
@@ -71,8 +73,8 @@
     {
       "@type": "Organization",
       "@id": "https://umsawazobianight.top/#umsa",
-      "name": "University of Medical Students' Association (UMSA), University of Medical Sciences, Ondo",
-      "alternateName": ["UMSA", "UMSA UNIMED", "UMSA Ondo", "UNIMED Medical Students' Association"],
+      "name": "Medical Students' Association (UMSA), University of Medical Sciences, Ondo",
+      "alternateName": ["UMSA", "UMSA UNIMED", "UMSA Ondo", "University of Medical Sciences Ondo Medical Students' Association"],
       "url": "https://umsawazobianight.top/",
       "logo": "https://umsawazobianight.top/assets/images/logo-umsa.png",
       "parentOrganization": {
@@ -105,7 +107,19 @@
       "isPartOf": { "@id": "https://umsawazobianight.top/#website" },
       "about": { "@id": "https://umsawazobianight.top/#event" },
       "primaryImageOfPage": "https://umsawazobianight.top/assets/images/og-wazobia-night-2026.jpg",
+      "video": { "@id": "https://umsawazobianight.top/#experience-video" },
       "inLanguage": "en-NG"
+    },
+    {
+      "@type": "VideoObject",
+      "@id": "https://umsawazobianight.top/#experience-video",
+      "name": "The Cultural Experience — UMSA Wazobia Night 2026",
+      "description": "A preview of UMSA Wazobia Night 2026 — Nigerian music, dance, dress and food at NIEPA Field, University of Medical Sciences, Ondo.",
+      "thumbnailUrl": "https://umsawazobianight.top/assets/video/cultural-experience-poster.jpg",
+      "uploadDate": "2026-09-17",
+      "duration": "PT21S",
+      "contentUrl": "https://umsawazobianight.top/assets/video/cultural-experience.mp4",
+      "publisher": { "@id": "https://umsawazobianight.top/#umsa" }
     },
     {
       "@type": "Event",
@@ -213,7 +227,7 @@
 
     <div class="shell hero__inner">
       <div class="hero__copy">
-        <p class="hero__eyebrow" data-reveal="1">UMSA <span class="visually-hidden">(University of Medical Students’ Association, UNIMED Ondo)</span> presents</p>
+        <p class="hero__eyebrow" data-reveal="1">UMSA <span class="visually-hidden">(Medical Students’ Association, University of Medical Sciences, Ondo)</span> presents</p>
 
         <h1 class="hero__title">
           <span class="hero__title-line hero__title-line--wa" data-reveal="2">Wazobia</span>
@@ -223,7 +237,7 @@
 
         <p class="hero__lede" data-reveal="4">
           UMSA Wazobia Night 2026 — a night of Nigerian language, dress, rhythm and food,
-          hosted by the University of Medical Students' Association, UNIMED Ondo.
+          hosted by the University of Medical Sciences, Ondo Medical Students' Association (UMSA).
         </p>
 
         <div class="hero__actions" data-reveal="5">
@@ -424,6 +438,15 @@
           <h3 class="culture-card__name">Cheers to the Night</h3>
         </div>
       </li>
+      <li class="culture-card" data-card>
+        <div class="culture-card__media">
+          <img src="assets/images/culture/culture-14.jpg" width="1000" height="750" loading="lazy" decoding="async"
+               alt="Three people in coral bead crowns and red beaded regalia by a riverbank, two women and a seated man in flowing red.">
+        </div>
+        <div class="culture-card__body">
+          <h3 class="culture-card__name">Coral &amp; Crown</h3>
+        </div>
+      </li>
     </ul>
 
     <div class="shell cultures__controls" data-carousel-controls hidden>
@@ -436,11 +459,12 @@
   <!-- ============ SECTION 4 — AND BEYOND ============ -->
   <section class="beyond section" id="beyond" aria-labelledby="beyond-h">
     <div class="shell beyond__head">
-      <h2 class="beyond__title" id="beyond-h">And beyond.</h2>
-      <p class="beyond__sub">Nigeria is bigger than three names.</p>
+      <h2 class="beyond__title" id="beyond-h">Nigeria is more than<span>just three tribes.</span></h2>
       <p class="beyond__text">
-        Hundreds of ethnic groups, languages, traditions and ways of celebrating share this
-        country. Wazobia is where the name comes from — it was never the whole story.
+        Hundreds of ethnic groups, languages, traditions, and ways of celebrating make up this
+        country. Wazobia&mdash;&ldquo;come&rdquo; in Yoruba, Hausa, and Igbo&mdash;is a symbol of
+        coming together, not a definition of all that Nigeria is. It is where the name comes from;
+        it was never the whole story.
       </p>
     </div>
 
@@ -656,9 +680,11 @@
       </ol>
       <noscript>
         <ul class="programme__noscript">
-          <li>4:00 PM — Doors Open</li>
-          <li>6:00 PM — Programme Begins</li>
-          <li>Full programme details to be announced.</li>
+          <li>4:00 PM — Doors Open · Red Carpet</li>
+          <li>5:00 PM — Programme Begins</li>
+          <li>Eat · Drink · Dance</li>
+          <li>Celebrate · Connect · Experience</li>
+          <li>Late — Wazobia Night carries on.</li>
         </ul>
       </noscript>
     </div>
@@ -753,7 +779,6 @@
 
       <div class="payment-panel" id="payment-instructions" data-payment-info>
         <p class="payment-panel__title">Payment details</p>
-        <p class="payment-info__pending" data-payment-pending hidden>Payment details coming soon.</p>
         <dl class="payment-info__grid" data-payment-details>
           <div class="payment-info__row">
             <dt>Bank name</dt>
@@ -796,12 +821,55 @@
 
       <div class="tickets__cta">
         <a class="btn btn--primary" href="#payment-instructions" data-ticket-cta data-ticket-pending>Get your ticket</a>
-        <p class="tickets__cta-note">Ticket confirmation and payment details will appear here as soon as they're ready.</p>
       </div>
     </div>
   </section>
 
-  <!-- ============ SECTION 12 — SHARE THE NIGHT ============ -->
+  <!-- ============ SECTION 12 — FAQ ============ -->
+  <section class="faq section" id="faq" aria-labelledby="faq-h">
+    <div class="shell faq__head">
+      <p class="faq__eyebrow">Questions</p>
+      <h2 class="faq__title" id="faq-h">Frequently asked<span> questions.</span></h2>
+      <p class="faq__sub">Placeholder content below — replace each question and answer with the real FAQ copy.</p>
+    </div>
+
+    <div class="shell">
+      <div class="faq__list" data-faq-list>
+        <details class="faq__item">
+          <summary class="faq__question">Placeholder question 1 &mdash; e.g. What should I wear?
+            <span class="faq__icon" aria-hidden="true"></span>
+          </summary>
+          <div class="faq__answer"><p>Placeholder answer. Replace this text with the real answer.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary class="faq__question">Placeholder question 2 &mdash; e.g. Is the event open to non-UMSA students?
+            <span class="faq__icon" aria-hidden="true"></span>
+          </summary>
+          <div class="faq__answer"><p>Placeholder answer. Replace this text with the real answer.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary class="faq__question">Placeholder question 3 &mdash; e.g. Are tickets refundable?
+            <span class="faq__icon" aria-hidden="true"></span>
+          </summary>
+          <div class="faq__answer"><p>Placeholder answer. Replace this text with the real answer.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary class="faq__question">Placeholder question 4 &mdash; e.g. Where exactly is NIEPA Field?
+            <span class="faq__icon" aria-hidden="true"></span>
+          </summary>
+          <div class="faq__answer"><p>Placeholder answer. Replace this text with the real answer.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary class="faq__question">Placeholder question 5 &mdash; e.g. Can I pay at the gate?
+            <span class="faq__icon" aria-hidden="true"></span>
+          </summary>
+          <div class="faq__answer"><p>Placeholder answer. Replace this text with the real answer.</p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 13 — SHARE THE NIGHT ============ -->
   <section class="share section" id="share" aria-labelledby="share-h">
     <div class="shell share__head">
       <h2 class="share__title" id="share-h">Share the <span>night.</span></h2>
@@ -832,7 +900,7 @@
     </div>
   </section>
 
-  <!-- ============ SECTION 13 — WAZOBIA AWAITS / FINAL CTA ============ -->
+  <!-- ============ SECTION 14 — WAZOBIA AWAITS / FINAL CTA ============ -->
   <section class="final-cta section" id="final-cta" aria-labelledby="final-cta-h">
     <div class="final-cta__pattern" aria-hidden="true"></div>
     <div class="shell final-cta__inner">
@@ -855,7 +923,7 @@
     <div class="footer__brand">
       <div class="footer__logos">
         <img src="assets/images/logo-umsa.png" width="312" height="320" loading="lazy" decoding="async"
-             alt="UMSA crest — University of Medical Students' Association, UNIMED Ondo, host of Wazobia Night 2026">
+             alt="UMSA crest — Medical Students' Association, University of Medical Sciences, Ondo, host of Wazobia Night 2026">
         <img src="assets/images/logo-unimed.png" width="255" height="320" loading="lazy" decoding="async"
              alt="UNIMED crest — University of Medical Sciences, Ondo, home of UMSA Wazobia Night">
         <img src="assets/images/logo-tla.png" width="311" height="320" loading="lazy" decoding="async"
@@ -885,6 +953,7 @@
         <li><a href="#waiting">What's waiting for you</a></li>
         <li><a href="#programme">The night</a></li>
         <li><a href="#tickets">Get your ticket</a></li>
+        <li><a href="#faq">FAQ</a></li>
         <li><a href="#share">Share the night</a></li>
       </ul>
     </nav>
