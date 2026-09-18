@@ -1,0 +1,136 @@
+.contact-enquiries {
+  position: relative;
+  background: var(--cream-2);
+  overflow: hidden;
+}
+
+.contact-enquiries__inner {
+  display: grid;
+  gap: clamp(32px, 5vw, 52px);
+  padding-block: clamp(42px, 6vw, 72px);
+}
+
+/* ---------- heading ---------- */
+
+.contact-enquiries__heading {
+  position: relative;
+  border-top: 2px solid var(--ink);
+  padding-top: 14px;
+}
+
+.contact-enquiries__number {
+  display: block;
+  margin-bottom: 8px;
+  font-family: var(--font-display);
+  font-size: var(--step--1);
+  letter-spacing: 0.12em;
+  color: var(--red);
+}
+
+.contact-enquiries__title {
+  margin: 0;
+  max-width: 9ch;
+  font-family: var(--font-display);
+  font-size: var(--display-sm);
+  line-height: 0.82;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.contact-enquiries__title span {
+  display: block;
+  margin-top: 0.08em;
+  color: var(--orange);
+}
+/* ---------- contact information ---------- */
+
+.contact-enquiries__contact {
+  max-width: 680px;
+  border-top: 2px solid var(--ink);
+  padding-top: 18px;
+}
+
+.contact-enquiries__intro {
+  margin: 0 0 8px;
+  font-size: var(--step-0);
+  color: rgba(23, 19, 15, 0.72);
+}
+
+.contact-enquiries__name {
+  margin: 0 0 22px;
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  line-height: 0.95;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+/* ---------- whatsapp link ---------- */
+
+.contact-enquiries__whatsapp {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  width: fit-content;
+  min-height: 52px;
+  padding: 10px 16px;
+  border: 2px solid var(--ink);
+  background: var(--ink);
+  color: var(--text-dark-bg);
+  text-decoration: none;
+  transition:
+    background 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.contact-enquiries__whatsapp-label {
+  font-size: var(--step--1);
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.contact-enquiries__arrow {
+  font-size: 1.1rem;
+  color: var(--orange);
+}
+
+.contact-enquiries__number {
+  font-weight: 800;
+  font-size: var(--step-0);
+}
+
+.contact-enquiries__whatsapp:hover {
+  background: var(--orange);
+  color: var(--ink);
+  transform: translateY(-2px);
+}
+
+.contact-enquiries__whatsapp:hover .contact-enquiries__label,
+.contact-enquiries__whatsapp:hover .contact-enquiries__arrow {
+  color: var(--ink);
+}
+
+.contact-enquiries__whatsapp:focus-visible {
+  outline: 3px solid var(--red);
+  outline-offset: 4px;
+}
+
+/* ---------- desktop ---------- */
+
+@media (min-width: 800px) {
+  .contact-enquiries__inner {
+    grid-template-columns: minmax(0, 1.25fr) minmax(320px, 0.75fr);
+    align-items: end;
+    gap: 60px;
+  }
+
+  .contact-enquiries__contact {
+    align-self: end;
+    padding-bottom: 4px;
+  }
+}
