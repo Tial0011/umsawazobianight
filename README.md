@@ -115,7 +115,7 @@ export const programme = [
 Open `scripts/countdown.js` and edit one line:
 
 ```js
-const TARGET_UTC_MS = Date.UTC(2026, 9, 1, 15, 0, 0); // year, month (0-based!), day, hour, minute, second — in UTC
+const TARGET_UTC_MS = Date.UTC(2026, 9, 31, 15, 0, 0); // 31 October 2026, 4:00 PM WAT (UTC+1)
 ```
 
 The countdown is deliberately written in **UTC**, not the browser's local
