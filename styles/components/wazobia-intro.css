@@ -80,3 +80,9 @@
   .syllable__lang { margin-top: 14px; }
   .intro__statement { font-size: clamp(2.6rem, 4.6vw, 4.4rem); }
 }
+
+@media (min-width: 1200px) {
+  .intro__head { gap: clamp(64px, 9vw, 144px); }
+  .intro__title { max-width: 9ch; }
+  .intro__statement { max-width: 24ch; margin-left: auto; }
+}

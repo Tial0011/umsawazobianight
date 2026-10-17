@@ -52,6 +52,7 @@
 }
 
 @media (min-width: 900px) {
-  .culture-call__grid { gap: 64px; }
-  .culture-call__copy { max-width: 68ch; }
+  .culture-call__grid { grid-template-columns: minmax(0, 1.1fr) minmax(340px, .9fr); align-items: center; gap: clamp(64px, 10vw, 150px); }
+  .culture-call__title { font-size: clamp(5rem, 8vw, 8.5rem); }
+  .culture-call__copy { max-width: 52ch; }
 }

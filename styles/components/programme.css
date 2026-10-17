@@ -61,10 +61,17 @@
 .programme__noscript { max-width: 60ch; color: rgba(23,19,15,.75); }
 
 @media (min-width: 900px) {
-  .programme__head { max-width: 64ch; }
-  .programme__timeline { max-width: 760px; padding-left: 44px; }
+  .programme__head { max-width: 1240px; grid-template-columns: minmax(0, 1fr) minmax(280px, .65fr); align-items: end; gap: 56px; }
+  .programme__timeline { max-width: 980px; padding-left: 44px; margin-inline: auto; }
   .programme__timeline::before { left: 9px; }
   .programme__dot { left: -44px; width: 20px; height: 20px; top: 2px; }
   .programme__time { font-size: var(--step-0); }
   .programme__row-title { font-size: clamp(1.6rem, 2.6vw, 2.1rem); }
+}
+
+@media (min-width: 1200px) {
+  .programme__row { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 24px; }
+  .programme__time { grid-row: span 2; }
+  .programme__row-title, .programme__row-desc { grid-column: 2; }
+  .programme__row-title { margin-top: 0; }
 }

@@ -43,6 +43,20 @@ button { font: inherit; color: inherit; }
 
 .section { padding-block: var(--section-y); }
 
+@media (min-width: 900px) {
+  .section { padding-block: clamp(88px, 7.5vw, 124px); }
+  .section > .shell + .shell { margin-top: clamp(38px, 4vw, 64px); }
+  .section :is(.intro__head, .cultures__head, .experience__head, .waiting__head,
+    .programme__head, .tickets__head, .faq__head, .share__head) {
+    max-width: 1240px;
+  }
+  :is(.intro__title, .cultures__title, .beyond__title, .experience__title,
+    .culture-call__title, .waiting__title, .programme__title, .countdown__title,
+    .tickets__title, .faq__title, .share__title) {
+    text-wrap: balance;
+  }
+}
+
 /* Anchor links land below the sticky navbar instead of under it */
 main section[id], #hero { scroll-margin-top: var(--nav-h); }
 

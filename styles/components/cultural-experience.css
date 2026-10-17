@@ -112,5 +112,7 @@
 }
 
 @media (min-width: 1200px) {
-  .experience > .shell { column-gap: 88px; }
+  .experience > .shell { column-gap: clamp(88px, 10vw, 160px); }
+  .experience__head { align-content: center; }
+  .video-frame { max-width: 720px; justify-self: end; }
 }

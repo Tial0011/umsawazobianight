@@ -37,3 +37,9 @@
   .share__actions .btn { width: auto; }
   .share__row { display: contents; }
 }
+
+@media (min-width: 1000px) {
+  .share__head { grid-template-columns: minmax(0, 1fr) minmax(240px, .55fr); align-items: end; gap: 56px; max-width: 1160px; }
+  .share__title span { display: inline; }
+  .share__actions { max-width: 1160px; }
+}

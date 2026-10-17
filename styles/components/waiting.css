@@ -59,7 +59,7 @@
   .waiting__item { border-bottom: 0; }
   .waiting__item:nth-child(odd) { border-right: 2px solid var(--ink); }
   .waiting__item:nth-child(n+3) { border-top: 2px solid var(--ink); }
-  .waiting__item-inner { padding: 40px 48px; grid-template-columns: auto minmax(0,1fr); align-items: start; gap: 12px 24px; }
+  .waiting__item-inner { padding: clamp(36px, 4vw, 56px); grid-template-columns: auto minmax(0,1fr); align-items: start; gap: 12px 28px; }
   .waiting__num { font-size: clamp(2.2rem, 3vw, 3rem); }
   .waiting__name { font-size: clamp(1.9rem, 3vw, 2.5rem); }
 }

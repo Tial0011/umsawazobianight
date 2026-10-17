@@ -71,3 +71,11 @@
   }
   .final-cta__actions .btn { width: auto; }
 }
+
+@media (min-width: 1000px) {
+  .final-cta__inner { grid-template-columns: minmax(0, 1fr) auto; justify-items: start; align-items: center; text-align: left; gap: 22px 64px; }
+  .final-cta__eyebrow, .final-cta__title, .final-cta__meta { grid-column: 1; }
+  .final-cta__title { grid-row: span 2; font-size: clamp(5rem, 8vw, 8rem); }
+  .final-cta__meta { grid-row: 3; }
+  .final-cta__actions { grid-column: 2; grid-row: 1 / span 3; justify-content: flex-end; }
+}

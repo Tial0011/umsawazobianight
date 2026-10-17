@@ -111,3 +111,10 @@
   .culture-card, .culture-card__media img { transition: none !important; }
   .culture-card:hover { transform: none; }
 }
+
+@media (min-width: 1200px) {
+  .cultures__head { gap: 72px; }
+  .cultures__rail { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 24px; }
+  .culture-card__media img { aspect-ratio: 4 / 5; }
+  .culture-card__body { padding: 20px 20px 22px; }
+}
