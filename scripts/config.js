@@ -14,8 +14,8 @@ export const eventConfig = {
   university: 'UNIMED',
   universityFull: 'University of Medical Sciences, Ondo',
 
-  date: '01 October 2026',
-  isoDate: '2026-10-01',
+  date: '31 October 2026',
+  isoDate: '2026-10-31',
   time: '4:00 PM',
   venue: 'NIEPA Field',
 

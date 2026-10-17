@@ -1,10 +1,10 @@
 /* Live countdown to Wazobia Night 2026.
-   Target: 1 October 2026, 4:00 PM WAT (West Africa Time, UTC+1, no DST).
+   Target: 31 October 2026, 4:00 PM WAT (West Africa Time, UTC+1, no DST).
    Expressed directly in UTC (15:00 UTC) so it is correct no matter what
    timezone the visitor's device is set to. To change the event date/time,
    edit TARGET_UTC_MS below — see the README for the conversion note. */
 
-const TARGET_UTC_MS = Date.UTC(2026, 9, 1, 15, 0, 0); // 2026-10-01T15:00:00Z = 16:00 WAT
+const TARGET_UTC_MS = Date.UTC(2026, 9, 31, 15, 0, 0); // 2026-10-31T15:00:00Z = 16:00 WAT
 
 function pad(n) {
   return String(Math.max(0, n)).padStart(2, '0');

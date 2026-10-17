@@ -2,12 +2,12 @@ import { eventConfig } from './config.js';
 
 const SHARE_TITLE = 'Wazobia Night 2026';
 const WHATSAPP_TEXT =
-  'Wazobia Night 2026 is happening on 01 October 2026 at NIEPA Field from 4:00 PM. Come as your culture.';
+  'Wazobia Night is back! Join us on 31 October 2026 at NIEPA Field from 4:00 PM. Come as your culture.';
 const X_TEXT =
-  'Wazobia Night 2026 \u2014 one night, many cultures, one Nigeria. 01 October 2026 \u00B7 NIEPA Field \u00B7 4:00 PM.';
-const NATIVE_TEXT = 'Join UMSA Wazobia Night 2026 \u2014 01 October 2026, NIEPA Field, 4:00 PM.';
+  'Wazobia Night is back! One night, many cultures, one Nigeria. 31 October 2026 \u00B7 NIEPA Field \u00B7 4:00 PM.';
+const NATIVE_TEXT = 'Wazobia Night is back! Join UMSA on 31 October 2026 at NIEPA Field, 4:00 PM.';
 const INSTAGRAM_TEXT =
-  'Wazobia Night 2026 \u2014 one night, many cultures, one Nigeria. 01 October 2026 \u00B7 NIEPA Field \u00B7 4:00 PM.';
+  'Wazobia Night is back! One night, many cultures, one Nigeria. 31 October 2026 \u00B7 NIEPA Field \u00B7 4:00 PM.';
 
 function getShareUrl() {
   const configured = eventConfig.siteUrl.trim();
