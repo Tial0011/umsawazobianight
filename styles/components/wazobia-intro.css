@@ -59,13 +59,14 @@
   line-height: 1.05;
   text-transform: uppercase;
   color: var(--ink);
+  text-align: center;
 }
 .intro__statement-accent { color: var(--orange); }
 
 @media (min-width: 900px) {
   .intro__head {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    align-items: end;
+    align-items: center;
     gap: 60px;
   }
   .syllables { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-bottom: 2px solid var(--ink); }
@@ -84,5 +85,5 @@
 @media (min-width: 1200px) {
   .intro__head { gap: clamp(64px, 9vw, 144px); }
   .intro__title { max-width: 9ch; }
-  .intro__statement { max-width: 24ch; margin-left: auto; }
+  .intro__statement { max-width: none; margin-inline: auto; }
 }

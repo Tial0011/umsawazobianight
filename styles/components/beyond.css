@@ -75,12 +75,13 @@
   line-height: 1.08;
   text-transform: uppercase;
   color: var(--cream);
+  text-align: center;
 }
 .beyond__close::first-line { color: var(--cream); }
 
 @media (min-width: 900px) {
-  .beyond__head { grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 20px 64px; align-items: start; }
-  .beyond__title { grid-row: span 2; font-size: clamp(4rem, 9vw, 8rem); }
-  .beyond__text { align-self: start; }
-  .beyond__close { max-width: 18ch; }
+  .beyond__head { grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 20px 64px; align-items: center; }
+  .beyond__title { font-size: clamp(4rem, 9vw, 8rem); }
+  .beyond__text { align-self: center; }
+  .beyond__close { max-width: none; margin-inline: auto; }
 }

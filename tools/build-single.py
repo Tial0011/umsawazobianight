@@ -26,7 +26,7 @@ def data_uri(path: pathlib.Path) -> str:
 
 # ---- CSS: inline every stylesheet, resolving url() references ----------------
 css_parts = []
-for match in re.finditer(r'<link rel="stylesheet" href="(styles/[^"]+)">', html):
+for match in re.finditer(r'<link rel="stylesheet" href="(styles/[^"]+)"\s*/?>', html):
     href = match.group(1)
     path = ROOT / href
     css = path.read_text()
@@ -39,7 +39,7 @@ for match in re.finditer(r'<link rel="stylesheet" href="(styles/[^"]+)">', html)
 
     css_parts.append(re.sub(r'url\(([^)]+)\)', fix, css))
 
-html = re.sub(r'\s*<link rel="stylesheet" href="styles/[^"]+">', "", html)
+html = re.sub(r'\s*<link rel="stylesheet" href="styles/[^"]+"\s*/?>', "", html)
 html = html.replace("</head>", "<style>\n" + "\n".join(css_parts) + "\n</style>\n</head>")
 
 # ---- JS: flatten the ES modules into one classic script ---------------------
@@ -51,6 +51,29 @@ order = [
 js = []
 for name in order:
     src = (ROOT / "scripts" / name).read_text()
+    if name == "afro-wall.js":
+        # The standalone bundle has no adjacent assets directory, and the
+        # Afro Wall image URLs are assembled at runtime. Embed its full-size
+        # JPEGs and use those as the standalone fallback sources.
+        wall_assets = {
+            path.name: data_uri(path)
+            for path in sorted((ROOT / "assets/images/afro-wall").glob("*-full.jpg"))
+        }
+        inline_map = "const AFRO_WALL_INLINE = " + repr(wall_assets) + ";"
+        src = src.replace(
+            "const DIR = 'assets/images/afro-wall';",
+            "const DIR = 'assets/images/afro-wall';\n" + inline_map,
+        )
+        src = re.sub(
+            r"const srcset = \(item, ext\) =>\n  item\.widths\.map\(\(w\) => `\$\{DIR\}/\$\{stem\(item\)\}-\$\{w\}\.\$\{ext\} \$\{w\}w`\)\.join\(', '\);",
+            "const srcset = () => '';",
+            src,
+        )
+        src = re.sub(
+            r"const fallbackSrc = \(item, ext = 'jpg'\) =>\n  `\$\{DIR\}/\$\{stem\(item\)\}-\$\{item\.widths\[item\.widths\.length - 1\]\}\.\$\{ext\}`;",
+            "const fallbackSrc = (item) => AFRO_WALL_INLINE[`${item.name}-full.jpg`] || '';",
+            src,
+        )
     src = re.sub(r'^\s*import .*?;\s*$', "", src, flags=re.M)
     # Strip the "export " keyword from any export (function/const/let/var),
     # since the bundled output is a plain classic script, not a module.

@@ -50,6 +50,7 @@
 @media (min-width: 900px) {
   /* The sub-line keeps its measure; the heading needs the full width to
      hold "What's waiting" on one line at desktop type sizes. */
+  .waiting .waiting__head { max-width: var(--shell); }
   .waiting__sub { max-width: 52ch; }
   .waiting__list {
     display: grid;

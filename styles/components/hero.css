@@ -44,15 +44,31 @@
   height: 2px;
   background: linear-gradient(90deg, var(--gold), transparent);
 }
-.hero__back {
-  display: inline-flex;
+.hero__announcement {
+  display: flex;
   align-items: center;
-  width: fit-content;
-  padding: 7px 12px;
-  border: 1px solid rgba(216, 155, 43, 0.7);
-  background: rgba(17, 16, 14, 0.66);
-  color: var(--text-dark-bg);
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  margin-top: 0;
+  margin-bottom: 16px;
+  color: var(--cream);
+  font-size: var(--step--1);
+  font-weight: 800;
   letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.hero__announcement-mark {
+  width: 8px;
+  height: 8px;
+  flex: 0 0 auto;
+  background: var(--orange);
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px rgba(241, 90, 0, 0.16);
+}
+.hero__announcement-date {
+  color: rgba(248, 232, 203, 0.68);
+  font-weight: 700;
+  letter-spacing: 0.08em;
 }
 
 .hero__title {
@@ -143,6 +159,7 @@
   }
   .hero__title { font-size: clamp(5rem, 9vw, 9rem); }
   .hero__lede { max-width: 42ch; }
+  .hero__announcement { margin-top: 0; margin-bottom: 18px; }
   .hero__band-inner { padding-block: 26px; }
   .factbar { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px 32px; }
   .factbar__item:nth-child(3n + 2),

@@ -1,6 +1,12 @@
 .tickets { background: var(--cream); position: relative; }
 
 .tickets__head { display: grid; gap: 12px; max-width: 60ch; }
+.tickets .tickets__head {
+  max-width: 760px;
+  margin-inline: auto;
+  justify-items: center;
+  text-align: center;
+}
 .tickets__eyebrow {
   font-size: var(--step--1);
   font-weight: 800;
@@ -55,11 +61,26 @@
 @media (min-width: 1100px) {
   .ticket-prices { max-width: 980px; margin-inline: auto; gap: 32px; }
   .ticket-card { min-height: 240px; align-content: center; padding: 44px 52px; }
-  .payment-panel { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.4fr); column-gap: 64px; align-items: start; }
+  .payment-panel {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px 48px;
+    align-items: start;
+    border-top: 4px solid var(--orange);
+    box-shadow: 0 20px 48px rgba(17, 16, 14, 0.14);
+  }
   .payment-panel__title { grid-column: 1 / -1; margin-bottom: 12px; }
   .payment-info__grid { grid-column: 1 / -1; }
-  .payment-panel__subtitle { grid-column: 1; }
-  .payment-contacts { grid-column: 2; margin-top: clamp(24px, 5vw, 36px); }
+  .payment-panel__subtitle {
+    grid-column: 1 / -1;
+    margin-top: 0;
+    border-top: 1px solid var(--rule-dark);
+  }
+  .payment-contacts {
+    grid-column: 1 / -1;
+    margin-top: -12px;
+    gap: 20px;
+  }
   .tickets__cta { justify-items: center; }
 }
 
@@ -70,7 +91,7 @@
 }
 .pay-step {
   border-bottom: 2px solid var(--ink);
-  padding-block: clamp(22px, 5vw, 30px);
+  padding: clamp(22px, 5vw, 30px) 12px;
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
   gap: 10px 20px;
@@ -104,7 +125,7 @@
     grid-template-columns: repeat(4, minmax(0, 1fr));
     border-bottom: 2px solid var(--ink);
   }
-  .pay-step { border-bottom: 0; padding: 32px 28px 32px 0; }
+  .pay-step { border-bottom: 0; padding: 32px 28px; }
   .pay-step:not(:last-child) { border-right: 2px solid var(--ink); }
 }
 
@@ -193,8 +214,26 @@
 .payment-contact__links a:hover { color: var(--gold); }
 
 @media (min-width: 700px) {
-  .payment-info__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+  .payment-info__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
   .payment-contacts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (min-width: 1100px) {
+  .payment-info__grid { gap: 20px; }
+  .payment-info__row {
+    min-width: 0;
+    padding: 18px;
+    border: 1px solid var(--rule-dark);
+    border-top: 2px solid var(--gold);
+    background: rgba(248, 232, 203, 0.045);
+  }
+  .payment-info__row dd { overflow-wrap: anywhere; }
+  .payment-contacts { margin-top: -12px; }
+  .payment-contact {
+    padding: 16px 18px;
+    border: 1px solid var(--rule-dark);
+    background: rgba(248, 232, 203, 0.045);
+  }
 }
 
 /* ---------- CTA ---------- */

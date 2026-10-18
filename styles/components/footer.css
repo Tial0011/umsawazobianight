@@ -102,5 +102,10 @@
     grid-template-columns: 1.4fr 1fr 1fr 1fr;
     align-items: start;
   }
+  .footer__details,
+  .footer__nav { text-align: right; }
+  .footer__details { grid-column: 3; }
+  .footer__nav { grid-column: 4; }
+  .footer__nav a { justify-content: flex-end; }
   .footer__legal { grid-column: 1 / -1; }
 }

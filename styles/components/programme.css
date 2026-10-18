@@ -61,7 +61,17 @@
 .programme__noscript { max-width: 60ch; color: rgba(23,19,15,.75); }
 
 @media (min-width: 900px) {
-  .programme__head { max-width: 1240px; grid-template-columns: minmax(0, 1fr) minmax(280px, .65fr); align-items: end; gap: 56px; }
+  .programme .programme__head {
+    max-width: 1320px;
+    grid-template-columns: max-content minmax(280px, 0.65fr);
+    align-items: end;
+    gap: clamp(24px, 4vw, 56px);
+  }
+  .programme__title {
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    font-size: clamp(2.4rem, 4.4vw, 4.5rem);
+  }
   .programme__timeline { max-width: 980px; padding-left: 44px; margin-inline: auto; }
   .programme__timeline::before { left: 9px; }
   .programme__dot { left: -44px; width: 20px; height: 20px; top: 2px; }

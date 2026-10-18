@@ -110,20 +110,41 @@
 
 @media (min-width: 900px) {
   .countdown__inner {
-    grid-template-areas: "eyebrow stats" "title stats" "meta stats" "done done" "noscript noscript";
-    grid-template-columns: minmax(260px, 0.8fr) minmax(0, 1.7fr);
-    justify-items: stretch;
+    grid-template-areas: "eyebrow" "title" "meta" "stats" "done" "noscript";
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
     align-items: center;
-    column-gap: clamp(48px, 7vw, 104px);
-    row-gap: 20px;
-    text-align: left;
+    gap: 18px;
+    text-align: center;
   }
-  .countdown__eyebrow, .countdown__title, .countdown__meta { grid-column: auto; }
-  .countdown__eyebrow { justify-self: start; align-self: end; }
-  .countdown__title { max-width: 10ch; }
-  .countdown__stats { grid-column: auto; grid-row: auto; max-width: none; gap: 16px; }
-  .countdown__meta { justify-self: start; align-self: start; }
-  .countdown__stat { padding-block: 40px; }
-  .countdown__value { font-size: clamp(3.5rem, 5vw, 5rem); }
+  .countdown__eyebrow, .countdown__title, .countdown__meta { grid-column: auto; justify-self: center; }
+  .countdown__title { max-width: none; font-size: clamp(4rem, 6vw, 7rem); }
+  .countdown__stats {
+    grid-column: auto;
+    grid-row: auto;
+    width: 100%;
+    max-width: 1040px;
+    gap: clamp(12px, 1.5vw, 20px);
+  }
+  .countdown__meta {
+    padding: 0;
+    border: 0;
+  }
+  .countdown__stat {
+    min-height: 176px;
+    align-content: center;
+    padding: 28px 8px;
+    border-top: 3px solid var(--orange);
+    background: linear-gradient(155deg, rgba(248, 232, 203, 0.11), rgba(248, 232, 203, 0.045));
+  }
+  .countdown__stat:nth-child(2) { border-top-color: var(--red); }
+  .countdown__stat:nth-child(3) { border-top-color: var(--gold); }
+  .countdown__stat:nth-child(4) { border-top-color: var(--orange); }
+  .countdown__value { font-size: clamp(3rem, 4.5vw, 4.75rem); }
   .countdown__done, .countdown__noscript { grid-column: auto; text-align: center; }
+}
+
+@media (min-width: 1200px) {
+  .countdown__stats { gap: 20px; }
+  .countdown__stat { min-height: 196px; }
 }

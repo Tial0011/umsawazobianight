@@ -93,7 +93,12 @@
 }
 
 @media (min-width: 900px) {
-  .cultures__head { grid-template-columns: minmax(0,1.2fr) minmax(0,1fr); align-items: end; gap: 48px; }
+  .cultures .cultures__head {
+    max-width: var(--shell);
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    align-items: center;
+    gap: 48px;
+  }
   .cultures__rail {
     max-width: var(--shell);
     margin-inline: auto;
